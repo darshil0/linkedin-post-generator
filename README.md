@@ -1,36 +1,33 @@
 # LinkedIn Post Architect (PostGenius)
 
-PostGenius is an elite LinkedIn ghostwriter and content strategist app that transforms your rough notes into high-performing, authentic LinkedIn posts using the standard-setting Gemini AI.
+PostGenius is an elite LinkedIn ghostwriter and content strategist app that transforms your rough notes into high-performing, authentic LinkedIn posts using professional content strategy principles.
 
 ## Key Features
 
-- **Elite AI Generation**: Built on professional content strategy principles like "The Slide" sentence structure and pattern-interrupt hooks.
-- **Smart Style Selection**: Choose from various post types (Thought Leadership, Personal Story, Lesson Learned, and more).
-- **Tone Orchestration**: Adjust the voice to match your professional brand (Professional, Conversational, Bold, Inspirational, etc.).
-- **Interactive Library**: Secure Google authentication allows you to save your best drafts to a personal "Architecture Library" and resume them at any time.
-- **Live Preview**: See your post exactly how it will appear on LinkedIn, complete with active hook and body sections.
-- **Reflective CTAs**: Automatically generates thoughtful, integrated calls-to-action that drive meaningful engagement.
+- **Elite Generation Logic**: Built on principles like "The Slide" sentence structure and pattern-interrupt hooks to ensure maximum readability and engagement.
+- **Smart Style Selection**: Choose from various post types (Thought Leadership, Personal Story, Lesson Learned, Career Update, and more).
+- **Tone Orchestration**: Adjust the voice to match your professional brand (Professional vs. Conversational).
+- **Architecture Library**: Save your best drafts locally to your "Architecture Library" and revisit them at any time.
+- **Minimalist UX**: A clean, two-pane layout inspired by modern professional tools.
+- **Integrated CTAs**: Automatically generates thoughtful engagement questions.
 
 ## Technical Stack
 
-- **Frontend**: React 18, Vite, Tailwind CSS
-- **AI Engine**: Google Gemini (via `@google/genai`)
-- **Backend/Persistence**: Firebase Authentication, Cloud Firestore
-- **Animations**: Motion (f.k.a. Framer Motion)
-- **Icons**: Lucide React
+- **Frontend**: Vanilla ES6+ JavaScript, CSS3 (Modern Flexbox/Grid), Semantic HTML5.
+- **Persistence**: Browser `localStorage` for local draft management.
+- **Animations**: CSS Keyframes for smooth UI transitions.
 
 ## Getting Started
 
-1. **Input Your Topic**: Paste rough notes, a link, or just a few bullet points.
+1. **Input Your Topic**: Paste rough notes or a few bullet points.
 2. **Configure Your Strategy**: Select the style and tone that fits your goal.
-3. **Generate**: Click generate and watch as the AI crafts multiple drafts using different psychological angles.
-4. **Login**: Sign in with Google to save your drafts for later.
-5. **Copy & Post**: One-click copy for the body, hook, and hashtags.
+3. **Generate**: Click "Generate Drafts" to create your LinkedIn post.
+4. **Save**: Click "Save to Library" on any draft you want to keep.
+5. **Manage**: Use the "Architecture Library" pane to view or delete your saved drafts.
 
 ## Deployment Notes
 
-### GitHub Pages Pathing
-This project is configured with `base: './'` in `vite.config.ts` to ensure compatibility with GitHub Pages sub-directory deployments.
+This project is a static web application and can be deployed to any static hosting provider like GitHub Pages.
 
-### Environment Variables
-For the Gemini AI to function in your deployed build, ensure you provide your `GEMINI_API_KEY` during the build process. If using GitHub Actions, add it as a Repository Secret and pass it to the build step.
+### GitHub Actions
+The project includes a GitHub Actions workflow for automatic deployment to GitHub Pages.
