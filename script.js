@@ -116,16 +116,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 const h4 = document.createElement('h4');
                 h4.textContent = `Option ${index + 1}`;
 
-                const hook = document.createElement('div');
-                hook.innerHTML = `<strong>Hook:</strong> ${alt.hook}`;
+                const hookDiv = document.createElement('div');
+                const hookLabel = document.createElement('strong');
+                hookLabel.textContent = 'Hook: ';
+                const hookText = document.createTextNode(alt.hook);
+                hookDiv.appendChild(hookLabel);
+                hookDiv.appendChild(hookText);
 
-                const body = document.createElement('div');
-                body.style.whiteSpace = 'pre-wrap';
-                body.innerHTML = `<strong>Post:</strong>\n${alt.post}`;
+                const bodyDiv = document.createElement('div');
+                bodyDiv.style.whiteSpace = 'pre-wrap';
+                const bodyLabel = document.createElement('strong');
+                bodyLabel.textContent = 'Post:';
+                const bodyText = document.createTextNode(`\n${alt.post}`);
+                bodyDiv.appendChild(bodyLabel);
+                bodyDiv.appendChild(bodyText);
 
                 altDiv.appendChild(h4);
-                altDiv.appendChild(hook);
-                altDiv.appendChild(body);
+                altDiv.appendChild(hookDiv);
+                altDiv.appendChild(bodyDiv);
                 postContainer.appendChild(altDiv);
             });
         }
