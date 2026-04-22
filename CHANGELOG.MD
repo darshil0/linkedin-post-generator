@@ -7,6 +7,7 @@ All notable changes to the LinkedIn Post Architect project will be documented in
 - **Firebase Integration**: Full user authentication (Google login) and Cloud Firestore persistence.
 - **My Library**: A workspace where users can save, delete, and reload post drafts.
 - **Enhanced UI Feedback**: Replaced standard alerts with inline success/error states and checkmark animations.
+- **GitHub Pages Fix**: Resolved issue where the app would fail to load on sub-path deployments (GitHub Pages) by updating a relative base path in Vite.
 
 ### Changed
 - **Elite Prompt Strategy**: Major overhaul of the AI system instructions to follow top-tier content strategy (Mix of short/long sentences, sparse emoji protocol, restrictive jargon).
