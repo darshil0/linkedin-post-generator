@@ -165,24 +165,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let result = templates[type] || templates.thought_leadership;
         if (tone === 'casual') {
-            result = result.map(h => h.replace('trajectory', 'path').replace('Master', 'get good at').replace('master', 'get good at'));
+            result = result.map(h => h.replace('trajectory', 'path').replace(/Master/g, 'get good at').replace(/master/g, 'get good at'));
         }
         return result;
     }
 
     function getBodies(idea, type, tone, audience, length) {
         const aud = audience ? ` specifically for ${audience}` : "";
-        const intro = tone === 'professional' ? `In my experience with ${idea}${aud}, there is a clear divide between those who succeed and those who struggle.` : `I've been thinking a lot about ${idea}${aud} lately.`;
+        const intro = tone === 'professional' 
+            ? `In my experience with ${idea}${aud}, there is a clear divide between those who succeed and those who struggle.` 
+            : `I've been thinking a lot about ${idea}${aud} lately.`;
 
         const core = `The secret isn't more data or better tools.\n\nIt's about human-centric systems and consistent iteration. We often overcomplicate ${idea} because we're afraid of the simple work.`;
 
-        const details = {
+        const detailsMap = {
             short: "Focus on the outcome, not the process.",
-            medium: "When you strip away the noise, you find that the best approach to ${idea} is often the most direct one. It requires discipline, but the ROI is undeniable.",
-            long: "Most professionals overlook the foundational elements of ${idea}. By focusing on the underlying principles, you can build a system that scales.\n\nThis requires:\n1. Patience\n2. Willingness to fail\n3. Radical honesty\n\nSuccess doesn't happen overnight, but it does happen with a disciplined approach."
+            medium: `When you strip away the noise, you find that the best approach to ${idea} is often the most direct one. It requires discipline, but the ROI is undeniable.`,
+            long: `Most professionals overlook the foundational elements of ${idea}. By focusing on the underlying principles, you can build a system that scales.\n\nThis requires:\n1. Patience\n2. Willingness to fail\n3. Radical honesty\n\nSuccess doesn't happen overnight, but it does happen with a disciplined approach.`
         };
 
-        const variation1 = `${intro}\n\n${core}\n\n${details[length]}`;
+        const details = detailsMap[length] || detailsMap.medium;
+        const variation1 = `${intro}\n\n${core}\n\n${details}`;
         return [variation1];
     }
 
