@@ -4,9 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const tone = document.querySelector('input[name="tone"]:checked').value;
         const format = document.getElementById('format').value;
         const postOutput = document.getElementById('post-output');
+        const copyBtn = document.getElementById('copy-btn');
 
         // Clear previous output
         postOutput.innerHTML = '';
+        copyBtn.style.display = 'none';
 
         if (!postIdea) {
             const p = document.createElement('p');
@@ -48,5 +50,24 @@ document.addEventListener('DOMContentLoaded', () => {
         postOutput.appendChild(titleP);
         postOutput.appendChild(bodyP);
         postOutput.appendChild(hashtagsP);
+
+        // Show copy button
+        copyBtn.style.display = 'block';
+    });
+
+    document.getElementById('copy-btn').addEventListener('click', () => {
+        const postOutput = document.getElementById('post-output');
+        const textToCopy = postOutput.innerText;
+
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            const copyBtn = document.getElementById('copy-btn');
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied!';
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
     });
 });
