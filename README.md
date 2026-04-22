@@ -27,6 +27,10 @@ PostGenius is an elite LinkedIn ghostwriter and content strategist app that tran
 4. **Login**: Sign in with Google to save your drafts for later.
 5. **Copy & Post**: One-click copy for the body, hook, and hashtags.
 
-## Design Philosophy
+## Deployment Notes
 
-The app follows a **Clean Minimalism** theme—prioritizing clarity, white space, and a refined professional palette of slates and blues to keep the focus on the content.
+### GitHub Pages Pathing
+This project is configured with `base: './'` in `vite.config.ts` to ensure compatibility with GitHub Pages sub-directory deployments.
+
+### Environment Variables
+For the Gemini AI to function in your deployed build, ensure you provide your `GEMINI_API_KEY` during the build process. If using GitHub Actions, add it as a Repository Secret and pass it to the build step.
