@@ -1,82 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Generate professional LinkedIn posts in one click from your ideas.">
-    <meta name="keywords" content="LinkedIn, Post Generator, Content Creation, Social Media, AI">
-    <title>LinkedIn Post Generator</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>LinkedIn Post Generator</h1>
-
-        <div class="input-group">
-            <label for="post-idea">Topic / Notes / Draft:</label>
-            <textarea id="post-idea" placeholder="Enter your post topic, bullet points, or rough draft..."></textarea>
-        </div>
-
-        <div class="controls">
-            <div class="control-row">
-                <div class="control">
-                    <label>Tone:</label>
-                    <input type="radio" id="professional" name="tone" value="professional" checked>
-                    <label for="professional">Professional</label>
-                    <input type="radio" id="casual" name="tone" value="casual">
-                    <label for="casual">Casual</label>
-                </div>
-                <div class="control">
-                    <label for="post-type">Post Type:</label>
-                    <select id="post-type">
-                        <option value="thought_leadership">Thought Leadership</option>
-                        <option value="story">Personal Story</option>
-                        <option value="update">Career Update</option>
-                        <option value="lesson">Lesson Learned</option>
-                        <option value="announcement">Product/Feature Announcement</option>
-                        <option value="hiring">Hiring/Recruiting</option>
-                        <option value="educational">Educational</option>
-                        <option value="opinion">Opinion</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="control-row">
-                <div class="control full-width">
-                    <label for="audience">Audience (optional):</label>
-                    <input type="text" id="audience" placeholder="e.g. Software Engineers, Hiring Managers">
-                </div>
-            </div>
-
-            <div class="control-row">
-                <div class="control">
-                    <label for="length">Length:</label>
-                    <select id="length">
-                        <option value="short">Short</option>
-                        <option value="medium" selected>Medium</option>
-                        <option value="long">Long</option>
-                    </select>
-                </div>
-                <div class="control">
-                    <label for="cta">CTA (optional):</label>
-                    <input type="text" id="cta" placeholder="e.g. Join the waitlist">
-                </div>
-            </div>
-
-            <div class="control-row">
-                <div class="control">
-                    <input type="checkbox" id="include-hashtags">
-                    <label for="include-hashtags">Include Hashtags</label>
-                </div>
-            </div>
-        </div>
-
-        <button id="generate-btn">Generate Post</button>
-
-        <div id="post-output"></div>
-
-        <button id="copy-btn" style="display: none;">Copy Primary Post</button>
-    </div>
-    <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
+

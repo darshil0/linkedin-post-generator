@@ -1,27 +1,20 @@
-# LinkedIn Post Generator v1.2.0
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-Generate a polished LinkedIn post in one click from your topic, notes, or rough draft.
+# Run and deploy your AI Studio app
 
-## Features
+This contains everything you need to run your app locally.
 
--   **Intelligent Post Generation:** Turns rough ideas into strong, human-sounding LinkedIn posts.
--   **Multiple Style Modes:** Supports Thought Leadership, Personal Stories, Career Updates, Lessons Learned, and more.
--   **Audience Targeting:** Optionally specify your target audience for more relevant content.
--   **Tone & Length Control:** Choose between Professional or Casual tones, and Short, Medium, or Long formats.
--   **Structured Output:** Generates a strong hook, body, and clear CTA for every post.
--   **Alternate Versions:** Provides alternate hooks and post variations to choose from.
--   **Copy to Clipboard:** Easily copy the primary generated post with a single click.
--   **Responsive Design:** Optimized for both desktop and mobile devices.
+View your app in AI Studio: https://ai.studio/apps/5b17ac43-bc30-4dbe-bf15-f9ce39e0af77
 
-## How to Use
+## Run Locally
 
-1.  Open the `index.html` file in a web browser.
-2.  Enter your post idea, bullet points, or rough draft.
-3.  Select the desired post type, tone, and length.
-4.  (Optional) Specify your target audience and a specific CTA.
-5.  Click the "Generate Post" button.
-6.  Review the primary post and alternate versions. Click "Copy Primary Post" to use it.
+**Prerequisites:**  Node.js
 
-## For Developers/Agents
 
-Refer to `AGENTS.md` for instructions on how to maintain and improve this codebase.
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
