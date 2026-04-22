@@ -1,28 +1,26 @@
-# LinkedIn Post Generator v1.1.0
+# LinkedIn Post Generator v1.2.0
 
-This is a simple, client-side web application that helps users generate templates for LinkedIn posts.
+Generate a polished LinkedIn post in one click from your topic, notes, or rough draft.
 
 ## Features
 
--   **Post Idea Input:** A text area to enter the core idea for the post.
--   **Tone Selection:** Choose between "Professional" and "Casual" tones.
--   **Format Selection:** Select a format, such as "Standard," "Question," or "Story."
--   **Generate Post:** A button to generate a post template based on the selected options.
--   **Copy to Clipboard:** Easily copy the generated post with a single click.
+-   **Intelligent Post Generation:** Turns rough ideas into strong, human-sounding LinkedIn posts.
+-   **Multiple Style Modes:** Supports Thought Leadership, Personal Stories, Career Updates, Lessons Learned, and more.
+-   **Audience Targeting:** Optionally specify your target audience for more relevant content.
+-   **Tone & Length Control:** Choose between Professional or Casual tones, and Short, Medium, or Long formats.
+-   **Structured Output:** Generates a strong hook, body, and clear CTA for every post.
+-   **Alternate Versions:** Provides alternate hooks and post variations to choose from.
+-   **Copy to Clipboard:** Easily copy the primary generated post with a single click.
 -   **Responsive Design:** Optimized for both desktop and mobile devices.
--   **SEO Optimized:** Includes meta tags for better discoverability.
 
 ## How to Use
 
 1.  Open the `index.html` file in a web browser.
-2.  Enter your post idea in the text area.
-3.  Select a tone and format.
-4.  Click the "Generate Post" button.
-5.  Review the generated post and click "Copy to Clipboard" to use it.
-
-## Security
-
-The application is built with security in mind. All user-provided input is treated as plain text and safely rendered using `textContent` to prevent Cross-Site Scripting (XSS) vulnerabilities.
+2.  Enter your post idea, bullet points, or rough draft.
+3.  Select the desired post type, tone, and length.
+4.  (Optional) Specify your target audience and a specific CTA.
+5.  Click the "Generate Post" button.
+6.  Review the primary post and alternate versions. Click "Copy Primary Post" to use it.
 
 ## For Developers/Agents
 
