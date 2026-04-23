@@ -42,13 +42,17 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Clean up build artifacts
-        run: rm -rf node_modules
+      - name: Prepare deployment directory
+        run: |
+          mkdir -p deploy
+          cp index.html deploy/
+          cp -r src deploy/
+          cp -r assets deploy/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: 'deploy'
 
       - name: Deploy to GitHub Pages
         id: deployment
