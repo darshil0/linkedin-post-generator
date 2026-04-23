@@ -27,7 +27,7 @@ PostGenius is a high-fidelity static web application built with HTML5, CSS3, and
 ├── Skills.md               # Technical competency guide
 ├── Design.md               # Design system specification
 ├── AGENTS.md               # This file
-├── package.json            # Dev tooling and metadata (v1.7.1)
+├── package.json            # Dev tooling and metadata (v1.7.0)
 ├── LICENSE                 # MIT License
 └── .github/                # Automation workflows
 ```
