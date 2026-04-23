@@ -4,22 +4,30 @@ export function getHooks(idea, type, tone) {
         thought_leadership: [
             `Most people think ${idea} is a technical problem.\n\nIt's not. It's a psychology problem.`,
             `I spent 10 years learning about ${idea}.\n\nYou can learn the most important lesson in 30 seconds.`,
-            `Unpopular opinion: ${idea} is the most underrated skill right now.`
+            `Unpopular opinion: ${idea} is the most underrated skill right now.`,
+            `The difference between good and elite in ${idea} comes down to one thing.`,
+            `Stop optimizing for ${idea}. Start optimizing for clarity.`
         ],
         story: [
             `I almost quit when I first started with ${idea}.`,
             `A simple conversation about ${idea} changed my entire career trajectory.`,
-            `I used to be afraid of ${idea}.\n\nUntil I realized this one truth.`
+            `I used to be afraid of ${idea}.\n\nUntil I realized this one truth.`,
+            `Last year, I failed miserably at ${idea}. Here's what I wish I knew then.`,
+            `Everyone sees the results of ${idea}. Nobody sees the 5 AM starts.`
         ],
         lesson: [
             `The biggest lesson I've learned about ${idea} is also the simplest.`,
             `Stop trying to get good at ${idea}.\n\nStart trying to understand the foundation.`,
-            `If I could go back and give my younger self advice on ${idea}, I'd say this:`
+            `If I could go back and give my younger self advice on ${idea}, I'd say this:`,
+            `Success in ${idea} is 80% discipline and 20% strategy.`,
+            `The best way to learn ${idea} is to teach it.`
         ],
         educational: [
             `How to get good at ${idea} (without the 10,000 hours).`,
             `The 3-step framework for ${idea} that actually works.`,
-            `Most people fail at ${idea} because they miss this one step.`
+            `Most people fail at ${idea} because they miss this one step.`,
+            `Want to master ${idea}? Follow this simple 5-day plan.`,
+            `The secret to ${idea} isn't complexity. It's consistency.`
         ]
     };
 
@@ -28,6 +36,8 @@ export function getHooks(idea, type, tone) {
         result = result.map(h =>
             h.replace(/trajectory/g, 'path')
              .replace(/master/gi, 'get good at')
+             .replace(/understand/gi, 'get')
+             .replace(/adhering/gi, 'sticking to')
         );
     }
     return result;
@@ -48,18 +58,18 @@ export function getBodies(idea, tone, audience, length) {
     };
 
     const details = detailsMap[length] || detailsMap.medium;
-    const variation1 = `${intro}\n\n${core}\n\n${details}`;
-    return [variation1];
+    return [`${intro}\n\n${core}\n\n${details}`];
 }
 
-// Note: `pref` is the user-supplied CTA preference; returns default if empty.
 export function getCTAs(pref) {
     return [pref || "What's the one thing you'd add to this?"];
 }
 
 export function getHashtags(idea, type) {
-    const base = idea.split(' ')[0].toLowerCase().replace(/[^a-z]/g, '');
-    return [`#${base}`, `#${type}`, `#strategy`, `#growth`];
+    const words = idea.split(' ').filter(w => w.length > 3).map(w => w.toLowerCase().replace(/[^a-z]/g, ''));
+    const base = words[0] || 'strategy';
+    const second = words[1] || 'growth';
+    return [`#${base}`, `#${second}`, `#${type}`, `#strategy`];
 }
 
 export function generateLinkedInPost(inputs) {
@@ -70,56 +80,86 @@ export function generateLinkedInPost(inputs) {
     const ctas = getCTAs(ctaPreference);
     const hashtags = includeHashtags ? getHashtags(idea, postType) : [];
 
+    // Pick random hook for variety
+    const randomIdx = Math.floor(Math.random() * hooks.length);
+    const otherHooks = hooks.filter((_, i) => i !== randomIdx);
+
     return {
         id: Date.now(),
         post_type: postType,
-        hook: hooks[0],
+        hook: hooks[randomIdx],
         post: bodies[0],
         cta: ctas[0],
         hashtags: hashtags,
         idea: idea,
-        alt_versions: [
-            { hook: hooks[1] },
-            { hook: hooks[2] }
-        ]
+        alt_versions: otherHooks.map(h => ({ hook: h }))
     };
 }
-
-
 
 // DOM Manipulation Logic
 if (typeof document !== 'undefined') {
     document.addEventListener('DOMContentLoaded', () => {
         const postIdeaInput = document.getElementById('post-idea');
         const charCounter = document.getElementById('char-counter');
+        const progressFill = document.getElementById('progress-fill');
         const generateBtn = document.getElementById('generate-btn');
         const clearBtn = document.getElementById('clear-btn');
         const postOutput = document.getElementById('post-output');
         const libraryList = document.getElementById('library-list');
+        const librarySearch = document.getElementById('library-search');
         const toastContainer = document.getElementById('toast-container');
+        const themeToggle = document.getElementById('theme-toggle');
 
-        // Initialize Library
+        // Initialize
         updateLibraryUI();
+        initTheme();
 
-        // Character Counter
+        // Theme Logic
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.setAttribute('data-theme', savedTheme);
+            themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌓';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const current = document.body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            themeToggle.textContent = next === 'dark' ? '☀️' : '🌓';
+        });
+
+        // Character Counter & Progress
         postIdeaInput.addEventListener('input', () => {
             const count = postIdeaInput.value.length;
-            charCounter.textContent = `${count} characters`;
+            const max = 3000;
+            charCounter.textContent = `${count} / ${max}`;
             
-            // Visual feedback for character count
-            if (count > 2500) {
+            const percent = Math.min((count / max) * 100, 100);
+            progressFill.style.width = `${percent}%`;
+            
+            if (count > max) {
+                progressFill.style.background = 'var(--error-red)';
                 charCounter.style.color = 'var(--error-red)';
-            } else if (count > 2000) {
+            } else if (count > max * 0.8) {
+                progressFill.style.background = 'orange';
                 charCounter.style.color = 'orange';
             } else {
+                progressFill.style.background = 'var(--primary-blue)';
                 charCounter.style.color = 'var(--text-muted)';
             }
+        });
+
+        // Search Logic
+        librarySearch.addEventListener('input', () => {
+            updateLibraryUI(librarySearch.value.trim());
         });
 
         // Clear Form
         clearBtn.addEventListener('click', () => {
             postIdeaInput.value = '';
-            charCounter.textContent = '0 characters';
+            charCounter.textContent = '0 / 3000';
+            progressFill.style.width = '0%';
             document.getElementById('audience').value = '';
             document.getElementById('cta').value = '';
             postOutput.innerHTML = '';
@@ -141,11 +181,6 @@ if (typeof document !== 'undefined') {
                 return;
             }
 
-            if (postIdea.length < 5) {
-                showToast('Input too short for a high-quality post.', 'error');
-                return;
-            }
-
             const result = generateLinkedInPost({
                 idea: postIdea,
                 tone,
@@ -161,32 +196,28 @@ if (typeof document !== 'undefined') {
         });
 
         function showToast(message, type = 'success') {
-            // Limit active toasts
             if (toastContainer.children.length > 2) {
                 toastContainer.removeChild(toastContainer.firstChild);
             }
 
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
-            
             const icon = type === 'success' ? '✅' : '⚠️';
             toast.textContent = `${icon} ${message}`;
-            
             toastContainer.appendChild(toast);
+            
             setTimeout(() => {
                 toast.style.opacity = '0';
-                toast.style.transform = 'translateX(20px)';
-                toast.style.transition = 'all 0.3s ease';
                 setTimeout(() => toast.remove(), 300);
             }, 3000);
         }
 
         function copyToClipboard(result) {
-            const fullPost = `${result.hook}\n\n${result.post}\n\n${result.cta}\n\n${result.hashtags.join(' ')}`;
-            navigator.clipboard.writeText(fullPost).then(() => {
+            const content = result.content || `${result.hook}\n\n${result.post}\n\n${result.cta}\n\n${result.hashtags.join(' ')}`;
+            navigator.clipboard.writeText(content).then(() => {
                 showToast('Copied to clipboard!');
             }).catch(err => {
-                console.error('Could not copy text: ', err);
+                console.error('Copy error:', err);
                 showToast('Failed to copy text.', 'error');
             });
         }
@@ -207,14 +238,28 @@ if (typeof document !== 'undefined') {
             const copyBtn = document.createElement('button');
             copyBtn.className = 'copy-btn';
             copyBtn.textContent = 'Copy';
-            copyBtn.setAttribute('aria-label', 'Copy post to clipboard');
-            copyBtn.onclick = () => copyToClipboard(result);
+            copyBtn.onclick = () => {
+                // Get current text from the editable sections
+                const editedContent = Array.from(postContainer.querySelectorAll('.post-content-editable'))
+                    .map(el => el.textContent)
+                    .join('\n\n');
+                copyToClipboard({ content: editedContent });
+            };
 
             const saveBtn = document.createElement('button');
             saveBtn.className = 'save-btn';
             saveBtn.textContent = 'Save';
-            saveBtn.setAttribute('aria-label', 'Save post to library');
-            saveBtn.onclick = () => saveToLibrary(result);
+            saveBtn.onclick = () => {
+                // Save edited content
+                const editedPost = {
+                    ...result,
+                    hook: postContainer.querySelector('[data-type="hook"]').textContent,
+                    post: postContainer.querySelector('[data-type="body"]').textContent,
+                    cta: postContainer.querySelector('[data-type="cta"]').textContent,
+                    hashtags: postContainer.querySelector('[data-type="tags"]').textContent.split(' ')
+                };
+                saveToLibrary(editedPost);
+            };
 
             actionsDiv.appendChild(copyBtn);
             actionsDiv.appendChild(saveBtn);
@@ -223,14 +268,11 @@ if (typeof document !== 'undefined') {
             postContainer.appendChild(header);
 
             const sections = [
-                { label: 'Hook (Pattern Interrupt)', content: result.hook },
-                { label: 'Body (The Slide)', content: result.post },
-                { label: 'Call to Action', content: result.cta }
+                { label: 'Hook (Click to Edit)', content: result.hook, type: 'hook' },
+                { label: 'Body (Click to Edit)', content: result.post, type: 'body' },
+                { label: 'Call to Action', content: result.cta, type: 'cta' },
+                { label: 'Hashtags', content: result.hashtags.join(' '), type: 'tags' }
             ];
-
-            if (result.hashtags && result.hashtags.length > 0) {
-                sections.push({ label: 'Hashtags', content: result.hashtags.join(' ') });
-            }
 
             sections.forEach(sec => {
                 const sectionDiv = document.createElement('div');
@@ -238,59 +280,91 @@ if (typeof document !== 'undefined') {
                 const label = document.createElement('strong');
                 label.textContent = sec.label;
                 const content = document.createElement('div');
-                content.className = 'post-content';
+                content.className = 'post-content-editable';
+                content.contentEditable = true;
                 content.textContent = sec.content;
+                content.dataset.type = sec.type;
+                
+                // Update mockup on change
+                content.addEventListener('input', () => updateMockup(postContainer));
+                
                 sectionDiv.appendChild(label);
                 sectionDiv.appendChild(content);
                 postContainer.appendChild(sectionDiv);
             });
 
-            // Alternate Versions
+            // Alternate Hooks
             if (result.alt_versions && result.alt_versions.length > 0) {
+                const altContainer = document.createElement('div');
+                altContainer.className = 'alt-versions-container';
                 const altTitle = document.createElement('strong');
-                altTitle.textContent = 'ALTERNATE HOOKS & ANGLES';
-                postContainer.appendChild(altTitle);
+                altTitle.textContent = 'ALTERNATE HOOKS';
+                altContainer.appendChild(altTitle);
 
                 result.alt_versions.forEach((alt, index) => {
                     const altDiv = document.createElement('div');
                     altDiv.className = 'alt-version';
-
-                    const label = document.createElement('strong');
-                    label.textContent = `Option ${index + 1}: `;
-
-                    const content = document.createTextNode(alt.hook);
-
-                    altDiv.appendChild(label);
-                    altDiv.appendChild(content);
-                    postContainer.appendChild(altDiv);
+                    altDiv.textContent = alt.hook;
+                    altDiv.style.cursor = 'pointer';
+                    altDiv.title = 'Click to use this hook';
+                    altDiv.onclick = () => {
+                        postContainer.querySelector('[data-type="hook"]').textContent = alt.hook;
+                        updateMockup(postContainer);
+                    };
+                    altContainer.appendChild(altDiv);
                 });
+                postContainer.appendChild(altContainer);
             }
 
+            // LinkedIn Mockup
+            const mockup = document.createElement('div');
+            mockup.className = 'mockup-container';
+            mockup.innerHTML = `
+                <div class="mockup-header">
+                    <div class="mockup-avatar"></div>
+                    <div class="mockup-info">
+                        <div>You (Content Strategist)</div>
+                        <div>1m • Global</div>
+                    </div>
+                </div>
+                <div class="mockup-body" id="mockup-text"></div>
+                <div class="mockup-footer">
+                    <span>👍 Like</span>
+                    <span>💬 Comment</span>
+                    <span>🔁 Repost</span>
+                </div>
+            `;
+            postContainer.appendChild(mockup);
             postOutput.appendChild(postContainer);
+            updateMockup(postContainer);
             postContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function updateMockup(container) {
+            const hook = container.querySelector('[data-type="hook"]').textContent;
+            const body = container.querySelector('[data-type="body"]').textContent;
+            const cta = container.querySelector('[data-type="cta"]').textContent;
+            const tags = container.querySelector('[data-type="tags"]').textContent;
+            const text = `${hook}\n\n${body}\n\n${cta}\n\n${tags}`;
+            container.querySelector('#mockup-text').textContent = text;
         }
 
         function saveToLibrary(post) {
             try {
                 const library = JSON.parse(localStorage.getItem('post_library') || '[]');
-                
-                // Prevent duplicates
-                const exists = library.some(item => 
-                    item.idea === post.idea && item.hook === post.hook
-                );
-                
+                const exists = library.some(item => item.id === post.id);
                 if (exists) {
-                    showToast('This draft is already in your library.', 'error');
-                    return;
+                    const idx = library.findIndex(item => item.id === post.id);
+                    library[idx] = post;
+                    showToast('Draft updated in library!');
+                } else {
+                    library.unshift(post);
+                    showToast('Saved to Architecture Library!');
                 }
-
-                library.unshift(post);
                 localStorage.setItem('post_library', JSON.stringify(library));
                 updateLibraryUI();
-                showToast('Saved to Architecture Library!');
             } catch (err) {
-                console.error('Library save error:', err);
-                showToast('Could not save to library.', 'error');
+                showToast('Could not save.', 'error');
             }
         }
 
@@ -300,70 +374,49 @@ if (typeof document !== 'undefined') {
                 library = library.filter(item => item.id !== id);
                 localStorage.setItem('post_library', JSON.stringify(library));
                 updateLibraryUI();
-                showToast('Draft deleted.', 'error');
+                showToast('Deleted.', 'error');
             } catch (err) {
-                console.error('Library delete error:', err);
+                console.error(err);
             }
         }
 
-        function updateLibraryUI() {
+        function updateLibraryUI(searchTerm = '') {
             let library = [];
             try {
                 library = JSON.parse(localStorage.getItem('post_library') || '[]');
             } catch (err) {
-                console.error('Library load error:', err);
+                console.error(err);
+            }
+
+            if (searchTerm) {
+                const s = searchTerm.toLowerCase();
+                library = library.filter(item => 
+                    item.idea.toLowerCase().includes(s) || 
+                    item.hook.toLowerCase().includes(s)
+                );
             }
             
             libraryList.innerHTML = '';
-
             if (library.length === 0) {
-                const emptyMsg = document.createElement('p');
-                emptyMsg.className = 'empty-msg';
-                emptyMsg.textContent = 'No saved drafts yet.';
-                libraryList.appendChild(emptyMsg);
+                libraryList.innerHTML = '<p class="empty-msg">No matching drafts.</p>';
                 return;
             }
 
             library.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'library-item';
-
-                const title = document.createElement('h4');
-                title.textContent = `${item.post_type.replace('_', ' ')}: ${item.idea.substring(0, 30)}...`;
-
-                const preview = document.createElement('p');
-                preview.className = 'preview';
-                preview.textContent = item.hook;
-
-                const actions = document.createElement('div');
-                actions.className = 'item-actions';
-
-                const loadBtn = document.createElement('button');
-                loadBtn.textContent = 'View';
-                loadBtn.onclick = () => renderPost(item);
-
-                const quickCopyBtn = document.createElement('button');
-                quickCopyBtn.className = 'secondary-btn';
-                quickCopyBtn.textContent = 'Copy';
-                quickCopyBtn.onclick = (e) => {
-                    e.stopPropagation();
-                    copyToClipboard(item);
-                };
-
-                const deleteBtn = document.createElement('button');
-                deleteBtn.className = 'delete-btn';
-                deleteBtn.textContent = 'Delete';
-                deleteBtn.onclick = (e) => {
-                    e.stopPropagation();
-                    deleteFromLibrary(item.id);
-                };
-
-                actions.appendChild(loadBtn);
-                actions.appendChild(quickCopyBtn);
-                actions.appendChild(deleteBtn);
-                div.appendChild(title);
-                div.appendChild(preview);
-                div.appendChild(actions);
+                div.innerHTML = `
+                    <h4>${item.post_type.replace('_', ' ')}: ${item.idea.substring(0, 30)}...</h4>
+                    <p class="preview">${item.hook}</p>
+                    <div class="item-actions">
+                        <button class="view-btn">View</button>
+                        <button class="copy-btn secondary-btn">Copy</button>
+                        <button class="delete-btn">Delete</button>
+                    </div>
+                `;
+                div.querySelector('.view-btn').onclick = () => renderPost(item);
+                div.querySelector('.copy-btn').onclick = () => copyToClipboard(item);
+                div.querySelector('.delete-btn').onclick = () => deleteFromLibrary(item.id);
                 libraryList.appendChild(div);
             });
         }

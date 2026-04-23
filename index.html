@@ -12,6 +12,9 @@
 <body>
     <div class="app-container">
         <header>
+            <div class="header-top">
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle Dark Mode">🌓</button>
+            </div>
             <h1>PostGenius</h1>
             <p class="tagline">LinkedIn Post Architect</p>
         </header>
@@ -25,7 +28,10 @@
                     <div class="input-group">
                         <div class="label-row">
                             <label for="post-idea">What's the core idea of your post?</label>
-                            <span id="char-counter" class="char-counter">0 characters</span>
+                            <div class="counter-wrap">
+                                <span id="char-counter" class="char-counter">0 / 3000</span>
+                                <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+                            </div>
                         </div>
                         <textarea id="post-idea" aria-label="Core idea for your LinkedIn post" placeholder="e.g., The importance of emotional intelligence in leadership..."></textarea>
                     </div>
@@ -92,6 +98,9 @@
                 <div class="card">
                     <h2>Architecture Library</h2>
                     <p class="subtitle">Your saved post blueprints.</p>
+                    <div class="search-wrap">
+                        <input type="text" id="library-search" placeholder="Search saved drafts...">
+                    </div>
                     <div id="library-list">
                         <!-- Saved items will appear here -->
                     </div>
