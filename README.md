@@ -4,6 +4,14 @@
 
 PostGenius is a high-fidelity, lightweight LinkedIn post generator designed for creators and professionals. It transforms raw ideas into structured, high-performing drafts using proven content frameworks—all without leaving your browser.
 
+## 💡 The Original Vision
+
+> "I'd like you to build a single-page web app called 'PostGenius' that helps people write better LinkedIn posts. It should have a clean, two-pane layout with a LinkedIn-inspired color scheme. In the left panel, users can input their core idea or topic. They should also have options to select a content framework, like 'Personal Story' or 'Educational,' and choose a tone, like 'Professional' or 'Casual.'
+>
+> When they click a 'Generate' button, the right panel should show the fully formatted post. The app should create a scroll-stopping hook, structure the body content, suggest a good call-to-action, and even generate some relevant hashtags. A key feature is providing a few different hook variations for the user to choose from.
+>
+> This whole thing should run locally in the browser with no server required. Please use standard HTML, CSS, and modern JavaScript. For persistence, like letting users save their favorite drafts, you can just use the browser's localStorage. A 'copy to clipboard' button for the final post is a must-have."
+
 ## ✨ Key Features
 
 - **Strategic Frameworks**: Choose from Thought Leadership, Personal Story, Lesson Learned, or Educational templates.
