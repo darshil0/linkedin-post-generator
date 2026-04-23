@@ -77,7 +77,7 @@ PostGenius uses specialized logic for different content archetypes:
 ├── Skills.md           # Technical competencies
 ├── Design.md           # Design system and aesthetic
 ├── AGENTS.md           # AI contributor instructions
-├── package.json        # Tooling configuration (v1.7.0)
+├── package.json        # Tooling configuration (v1.7.1)
 ├── LICENSE             # MIT License
 └── .github/            # GitHub Actions
     └── workflows/

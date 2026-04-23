@@ -2,6 +2,13 @@
 
 All notable changes to PostGenius (LinkedIn post architect) are documented here.
 
+## [1.7.1] - 2026-04-23
+### Fixed
+- **CI/CD Reliability**: Consolidated the deployment pipeline into a single job to prevent triggering and dependency issues.
+- **Test Environment**: Added `jsdom` support to Vitest to safely handle browser-specific logic in the CI environment.
+- **Unit Tests**: Corrected hashtag generation tests and function argument ordering to ensure 100% test passing.
+- **Linting Configuration**: Migrated to a dedicated `.eslintrc.json` file for more stable and professional linting orchestration.
+
 ## [1.7.0] - 2026-04-23
 ### Changed
 - **Full Codebase Refactor**: Standardized all JavaScript, HTML, and CSS to comply with the Google Coding Standards.
