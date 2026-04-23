@@ -2,6 +2,13 @@
 
 All notable changes to PostGenius (LinkedIn post architect) are documented here.
 
+## [1.7.1] - 2026-04-23
+### Changed
+- **Documentation Synchronization**: Aligned `AGENTS.md`, `Design.md`, and `README.md` with the current codebase implementation.
+- **API Reference Update**: Updated `AGENTS.md` to reflect camelCase keys in the `localStorage` schema.
+- **Technical Specification Update**: Added verified HSL color values and animation timings to `Design.md`.
+- **Deployment Clarity**: Corrected production URL and added ESM local development guidelines to `README.md`.
+
 ## [1.7.0] - 2026-04-23
 ### Changed
 - **Full Codebase Refactor**: Standardized all JavaScript, HTML, and CSS to comply with the Google Coding Standards.

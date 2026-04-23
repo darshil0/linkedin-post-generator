@@ -35,8 +35,10 @@ PostGenius follows the **"The Slide"** methodology to maximize engagement:
 
 PostGenius is a static application. You can use it in two ways:
 
-1.  **Production**: Visit the live app at [https://darshil0.github.io/linkedin-post-generator/](https://darshil0.github.io/linkedin-post-generator/).
-2.  **Local**: Open `index.html` in any modern web browser.
+1.  **Production**: Visit the live app at [https://darshil0.github.io/linkedin-post-architect/](https://darshil0.github.io/linkedin-post-architect/).
+2.  **Local development**:
+    - For basic use, open `index.html` in any modern web browser.
+    - **Note**: Because the project uses **ES Modules**, some browsers may block scripts when opened via the `file://` protocol. For the best development experience, run a local server (e.g., `npx serve .` or use the Live Server extension in VS Code).
 
 ### Basic workflow
 1.  **Ideate**: Enter your core topic in the input field.
