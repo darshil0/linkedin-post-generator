@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest run tests/script.test.js",
-    "lint": "npx eslint src/script.js --no-config-lookup --rule 'no-unused-vars: warn' --rule 'no-undef: error' --global document,window,localStorage,console,setTimeout,Date,exports,module,navigator"
+    "lint": "npx eslint src/script.js --no-config-lookup --rule 'no-unused-vars: warn' --rule 'no-undef: error' --global document,window,localStorage,console,setTimeout,Date,exports,module,navigator,FileReader,Math"
   },
   "devDependencies": {
     "eslint": "^10.2.1",
