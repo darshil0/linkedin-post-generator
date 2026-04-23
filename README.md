@@ -49,18 +49,22 @@ PostGenius doesn't just "write text." It follows the **"The Slide"** methodology
 
 ```
 .
-├── index.html          # Semantic HTML5 Structure
-├── style.css           # Premium CSS3 with Variables & Animations
-├── script.js           # ES Module Logic & DOM Interaction
-├── script.test.js      # Vitest Unit Tests
+├── index.html          # Main Application Entry
+├── src/                # Source Code
+│   ├── script.js       # Core ES Module Logic
+│   └── style.css       # Premium CSS3 Styling
+├── tests/              # Unit Testing
+│   └── script.test.js  # Vitest Test Suite
+├── assets/             # Media & Static Assets
+│   └── mockup.png      # Project Mockup
 ├── README.md           # Documentation
-├── CHANGELOG.md        # Version & Fix History
-├── AGENTS.md           # Developer & AI Contributor Instructions
+├── CHANGELOG.md        # Version History
+├── AGENTS.md           # AI Contributor Instructions
 ├── package.json        # Tooling Configuration (v1.4.1)
 ├── LICENSE             # MIT License
-└── .github/
+└── .github/            # GitHub Actions
     └── workflows/
-        └── static.yml  # Automated GitHub Pages Deployment
+        └── static.yml  # Pages Deployment
 ```
 
 ## 👨‍💻 Development

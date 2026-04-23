@@ -5,8 +5,8 @@
   "description": "A vanilla JavaScript LinkedIn post generator.",
   "type": "module",
   "scripts": {
-    "test": "vitest run",
-    "lint": "npx eslint script.js --no-config-lookup --rule 'no-unused-vars: warn' --rule 'no-undef: error' --global document,window,localStorage,console,setTimeout,Date,exports,module,navigator"
+    "test": "vitest run tests/script.test.js",
+    "lint": "npx eslint src/script.js --no-config-lookup --rule 'no-unused-vars: warn' --rule 'no-undef: error' --global document,window,localStorage,console,setTimeout,Date,exports,module,navigator"
   },
   "devDependencies": {
     "eslint": "^10.2.1",
