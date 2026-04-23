@@ -80,7 +80,6 @@ export function generateLinkedInPost(inputs) {
     const ctas = getCTAs(ctaPreference);
     const hashtags = includeHashtags ? getHashtags(idea, postType) : [];
 
-    // Pick random hook for variety
     const randomIdx = Math.floor(Math.random() * hooks.length);
     const otherHooks = hooks.filter((_, i) => i !== randomIdx);
 
@@ -92,7 +91,8 @@ export function generateLinkedInPost(inputs) {
         cta: ctas[0],
         hashtags: hashtags,
         idea: idea,
-        alt_versions: otherHooks.map(h => ({ hook: h }))
+        alt_versions: otherHooks.map(h => ({ hook: h })),
+        all_hooks: hooks
     };
 }
 
@@ -103,18 +103,24 @@ if (typeof document !== 'undefined') {
         const charCounter = document.getElementById('char-counter');
         const progressFill = document.getElementById('progress-fill');
         const generateBtn = document.getElementById('generate-btn');
+        const compareBtn = document.getElementById('compare-btn');
         const clearBtn = document.getElementById('clear-btn');
         const postOutput = document.getElementById('post-output');
         const libraryList = document.getElementById('library-list');
         const librarySearch = document.getElementById('library-search');
         const toastContainer = document.getElementById('toast-container');
         const themeToggle = document.getElementById('theme-toggle');
+        const avatarUpload = document.getElementById('avatar-upload');
+        const comparisonModal = document.getElementById('comparison-modal');
+        const comparisonGrid = document.getElementById('comparison-grid');
+        const closeModal = document.getElementById('close-modal');
+
+        let currentResult = null;
 
         // Initialize
         updateLibraryUI();
         initTheme();
 
-        // Theme Logic
         function initTheme() {
             const savedTheme = localStorage.getItem('theme') || 'light';
             document.body.setAttribute('data-theme', savedTheme);
@@ -129,6 +135,27 @@ if (typeof document !== 'undefined') {
             themeToggle.textContent = next === 'dark' ? '☀️' : '🌓';
         });
 
+        // Avatar Logic
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('mockup-avatar')) {
+                avatarUpload.click();
+            }
+        });
+
+        avatarUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    document.querySelectorAll('.mockup-avatar').forEach(av => {
+                        av.style.backgroundImage = `url(${event.target.result})`;
+                        av.style.backgroundSize = 'cover';
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
         // Character Counter & Progress
         postIdeaInput.addEventListener('input', () => {
             const count = postIdeaInput.value.length;
@@ -140,86 +167,95 @@ if (typeof document !== 'undefined') {
             
             if (count > max) {
                 progressFill.style.background = 'var(--error-red)';
-                charCounter.style.color = 'var(--error-red)';
-            } else if (count > max * 0.8) {
-                progressFill.style.background = 'orange';
-                charCounter.style.color = 'orange';
+                charCounter.classList.add('pulse');
             } else {
-                progressFill.style.background = 'var(--primary-blue)';
-                charCounter.style.color = 'var(--text-muted)';
+                charCounter.classList.remove('pulse');
+                progressFill.style.background = count > max * 0.8 ? 'orange' : 'var(--primary-blue)';
             }
         });
 
-        // Search Logic
-        librarySearch.addEventListener('input', () => {
-            updateLibraryUI(librarySearch.value.trim());
+        // Comparison Logic
+        compareBtn.addEventListener('click', () => {
+            if (!currentResult) return;
+            comparisonGrid.innerHTML = '';
+            currentResult.all_hooks.forEach(hook => {
+                const card = document.createElement('div');
+                card.className = 'card alt-version';
+                card.style.margin = '0';
+                card.textContent = hook;
+                card.onclick = () => {
+                    document.querySelector('[data-type="hook"]').textContent = hook;
+                    const container = document.querySelector('.generated-post');
+                    if (container) updateMockup(container);
+                    comparisonModal.style.display = 'none';
+                    showToast('Hook swapped!');
+                };
+                comparisonGrid.appendChild(card);
+            });
+            comparisonModal.style.display = 'flex';
         });
 
-        // Clear Form
-        clearBtn.addEventListener('click', () => {
-            postIdeaInput.value = '';
-            charCounter.textContent = '0 / 3000';
-            progressFill.style.width = '0%';
-            document.getElementById('audience').value = '';
-            document.getElementById('cta').value = '';
-            postOutput.innerHTML = '';
-            showToast('Form cleared.', 'error');
-        });
+        closeModal.onclick = () => comparisonModal.style.display = 'none';
+        window.onclick = (e) => { if (e.target === comparisonModal) comparisonModal.style.display = 'none'; };
 
+        // Generate Logic
         generateBtn.addEventListener('click', () => {
             const postIdea = postIdeaInput.value.trim();
-            const toneInput = document.querySelector('input[name="tone"]:checked');
-            const tone = toneInput ? toneInput.value : 'professional';
-            const postType = document.getElementById('post-type').value;
-            const audience = document.getElementById('audience').value.trim();
-            const length = document.getElementById('length').value;
-            const ctaPreference = document.getElementById('cta').value.trim();
-            const includeHashtags = document.getElementById('include-hashtags').checked;
-
             if (!postIdea) {
                 showToast('Please enter a post idea.', 'error');
                 return;
             }
 
-            const result = generateLinkedInPost({
-                idea: postIdea,
-                tone,
-                postType,
-                audience,
-                length,
-                ctaPreference,
-                includeHashtags
-            });
+            // Skeleton Loading State
+            postOutput.innerHTML = `
+                <div class="card generated-post">
+                    <div class="skeleton" style="width: 40%; height: 30px;"></div>
+                    <div class="skeleton" style="width: 90%;"></div>
+                    <div class="skeleton" style="width: 80%;"></div>
+                    <div class="skeleton" style="width: 70%;"></div>
+                </div>
+            `;
 
-            renderPost(result);
-            showToast('Drafts generated successfully!');
+            setTimeout(() => {
+                const tone = document.querySelector('input[name="tone"]:checked').value;
+                const postType = document.getElementById('post-type').value;
+                const audience = document.getElementById('audience').value.trim();
+                const length = document.getElementById('length').value;
+                const ctaPreference = document.getElementById('cta').value.trim();
+                const includeHashtags = document.getElementById('include-hashtags').checked;
+
+                currentResult = generateLinkedInPost({
+                    idea: postIdea, tone, postType, audience, length, ctaPreference, includeHashtags
+                });
+
+                renderPost(currentResult);
+                compareBtn.style.display = 'inline-block';
+                showToast('Drafts generated successfully!');
+            }, 1200);
         });
 
         function showToast(message, type = 'success') {
-            if (toastContainer.children.length > 2) {
-                toastContainer.removeChild(toastContainer.firstChild);
-            }
-
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
-            const icon = type === 'success' ? '✅' : '⚠️';
-            toast.textContent = `${icon} ${message}`;
+            toast.textContent = `${type === 'success' ? '✅' : '⚠️'} ${message}`;
             toastContainer.appendChild(toast);
-            
             setTimeout(() => {
                 toast.style.opacity = '0';
                 setTimeout(() => toast.remove(), 300);
             }, 3000);
         }
 
-        function copyToClipboard(result) {
-            const content = result.content || `${result.hook}\n\n${result.post}\n\n${result.cta}\n\n${result.hashtags.join(' ')}`;
-            navigator.clipboard.writeText(content).then(() => {
-                showToast('Copied to clipboard!');
-            }).catch(err => {
-                console.error('Copy error:', err);
-                showToast('Failed to copy text.', 'error');
-            });
+        function createConfetti() {
+            for (let i = 0; i < 30; i++) {
+                const p = document.createElement('div');
+                p.className = 'confetti-particle';
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.top = '-10px';
+                p.style.background = `hsl(${Math.random() * 360}, 70%, 50%)`;
+                p.style.transform = `rotate(${Math.random() * 360}deg)`;
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 2500);
+            }
         }
 
         function renderPost(result) {
@@ -239,18 +275,15 @@ if (typeof document !== 'undefined') {
             copyBtn.className = 'copy-btn';
             copyBtn.textContent = 'Copy';
             copyBtn.onclick = () => {
-                // Get current text from the editable sections
                 const editedContent = Array.from(postContainer.querySelectorAll('.post-content-editable'))
-                    .map(el => el.textContent)
-                    .join('\n\n');
-                copyToClipboard({ content: editedContent });
+                    .map(el => el.textContent).join('\n\n');
+                navigator.clipboard.writeText(editedContent).then(() => showToast('Copied!'));
             };
 
             const saveBtn = document.createElement('button');
             saveBtn.className = 'save-btn';
             saveBtn.textContent = 'Save';
             saveBtn.onclick = () => {
-                // Save edited content
                 const editedPost = {
                     ...result,
                     hook: postContainer.querySelector('[data-type="hook"]').textContent,
@@ -259,6 +292,7 @@ if (typeof document !== 'undefined') {
                     hashtags: postContainer.querySelector('[data-type="tags"]').textContent.split(' ')
                 };
                 saveToLibrary(editedPost);
+                createConfetti();
             };
 
             actionsDiv.appendChild(copyBtn);
@@ -268,71 +302,29 @@ if (typeof document !== 'undefined') {
             postContainer.appendChild(header);
 
             const sections = [
-                { label: 'Hook (Click to Edit)', content: result.hook, type: 'hook' },
-                { label: 'Body (Click to Edit)', content: result.post, type: 'body' },
+                { label: 'Hook', content: result.hook, type: 'hook' },
+                { label: 'Body', content: result.post, type: 'body' },
                 { label: 'Call to Action', content: result.cta, type: 'cta' },
                 { label: 'Hashtags', content: result.hashtags.join(' '), type: 'tags' }
             ];
 
             sections.forEach(sec => {
-                const sectionDiv = document.createElement('div');
-                sectionDiv.className = 'post-section';
-                const label = document.createElement('strong');
-                label.textContent = sec.label;
-                const content = document.createElement('div');
-                content.className = 'post-content-editable';
-                content.contentEditable = true;
-                content.textContent = sec.content;
-                content.dataset.type = sec.type;
-                
-                // Update mockup on change
-                content.addEventListener('input', () => updateMockup(postContainer));
-                
-                sectionDiv.appendChild(label);
-                sectionDiv.appendChild(content);
-                postContainer.appendChild(sectionDiv);
+                const div = document.createElement('div');
+                div.className = 'post-section';
+                div.innerHTML = `<strong>${sec.label}</strong><div class="post-content-editable" contenteditable="true" data-type="${sec.type}">${sec.content}</div>`;
+                div.querySelector('.post-content-editable').oninput = () => updateMockup(postContainer);
+                postContainer.appendChild(div);
             });
 
-            // Alternate Hooks
-            if (result.alt_versions && result.alt_versions.length > 0) {
-                const altContainer = document.createElement('div');
-                altContainer.className = 'alt-versions-container';
-                const altTitle = document.createElement('strong');
-                altTitle.textContent = 'ALTERNATE HOOKS';
-                altContainer.appendChild(altTitle);
-
-                result.alt_versions.forEach((alt, index) => {
-                    const altDiv = document.createElement('div');
-                    altDiv.className = 'alt-version';
-                    altDiv.textContent = alt.hook;
-                    altDiv.style.cursor = 'pointer';
-                    altDiv.title = 'Click to use this hook';
-                    altDiv.onclick = () => {
-                        postContainer.querySelector('[data-type="hook"]').textContent = alt.hook;
-                        updateMockup(postContainer);
-                    };
-                    altContainer.appendChild(altDiv);
-                });
-                postContainer.appendChild(altContainer);
-            }
-
-            // LinkedIn Mockup
             const mockup = document.createElement('div');
             mockup.className = 'mockup-container';
             mockup.innerHTML = `
                 <div class="mockup-header">
-                    <div class="mockup-avatar"></div>
-                    <div class="mockup-info">
-                        <div>You (Content Strategist)</div>
-                        <div>1m • Global</div>
-                    </div>
+                    <div class="mockup-avatar" title="Click to change photo"></div>
+                    <div class="mockup-info"><div>You (PostGenius Architect)</div><div>Just now • 🌐</div></div>
                 </div>
                 <div class="mockup-body" id="mockup-text"></div>
-                <div class="mockup-footer">
-                    <span>👍 Like</span>
-                    <span>💬 Comment</span>
-                    <span>🔁 Repost</span>
-                </div>
+                <div class="mockup-footer"><span>👍 Like</span><span>💬 Comment</span><span>🔁 Repost</span></div>
             `;
             postContainer.appendChild(mockup);
             postOutput.appendChild(postContainer);
@@ -345,63 +337,37 @@ if (typeof document !== 'undefined') {
             const body = container.querySelector('[data-type="body"]').textContent;
             const cta = container.querySelector('[data-type="cta"]').textContent;
             const tags = container.querySelector('[data-type="tags"]').textContent;
-            const text = `${hook}\n\n${body}\n\n${cta}\n\n${tags}`;
-            container.querySelector('#mockup-text').textContent = text;
+            container.querySelector('#mockup-text').textContent = `${hook}\n\n${body}\n\n${cta}\n\n${tags}`;
         }
 
         function saveToLibrary(post) {
             try {
                 const library = JSON.parse(localStorage.getItem('post_library') || '[]');
-                const exists = library.some(item => item.id === post.id);
-                if (exists) {
-                    const idx = library.findIndex(item => item.id === post.id);
-                    library[idx] = post;
-                    showToast('Draft updated in library!');
-                } else {
-                    library.unshift(post);
-                    showToast('Saved to Architecture Library!');
-                }
+                const idx = library.findIndex(item => item.id === post.id);
+                if (idx > -1) library[idx] = post; else library.unshift(post);
                 localStorage.setItem('post_library', JSON.stringify(library));
                 updateLibraryUI();
-            } catch (err) {
-                showToast('Could not save.', 'error');
-            }
-        }
-
-        function deleteFromLibrary(id) {
-            try {
-                let library = JSON.parse(localStorage.getItem('post_library') || '[]');
-                library = library.filter(item => item.id !== id);
-                localStorage.setItem('post_library', JSON.stringify(library));
-                updateLibraryUI();
-                showToast('Deleted.', 'error');
-            } catch (err) {
-                console.error(err);
-            }
+            } catch (err) { showToast('Error saving.', 'error'); }
         }
 
         function updateLibraryUI(searchTerm = '') {
             let library = [];
-            try {
-                library = JSON.parse(localStorage.getItem('post_library') || '[]');
-            } catch (err) {
-                console.error(err);
-            }
-
+            try { library = JSON.parse(localStorage.getItem('post_library') || '[]'); } catch (err) {}
             if (searchTerm) {
                 const s = searchTerm.toLowerCase();
-                library = library.filter(item => 
-                    item.idea.toLowerCase().includes(s) || 
-                    item.hook.toLowerCase().includes(s)
-                );
+                library = library.filter(item => item.idea.toLowerCase().includes(s) || item.hook.toLowerCase().includes(s));
             }
-            
             libraryList.innerHTML = '';
             if (library.length === 0) {
-                libraryList.innerHTML = '<p class="empty-msg">No matching drafts.</p>';
+                libraryList.innerHTML = `
+                    <svg class="empty-state-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                    <p class="empty-msg" style="text-align: center;">No drafts found.</p>
+                `;
                 return;
             }
-
             library.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'library-item';
@@ -415,10 +381,22 @@ if (typeof document !== 'undefined') {
                     </div>
                 `;
                 div.querySelector('.view-btn').onclick = () => renderPost(item);
-                div.querySelector('.copy-btn').onclick = () => copyToClipboard(item);
-                div.querySelector('.delete-btn').onclick = () => deleteFromLibrary(item.id);
+                div.querySelector('.copy-btn').onclick = () => navigator.clipboard.writeText(`${item.hook}\n\n${item.post}\n\n${item.cta}\n\n${item.hashtags.join(' ')}`).then(() => showToast('Copied!'));
+                div.querySelector('.delete-btn').onclick = () => {
+                    let lib = JSON.parse(localStorage.getItem('post_library') || '[]');
+                    localStorage.setItem('post_library', JSON.stringify(lib.filter(i => i.id !== item.id)));
+                    updateLibraryUI();
+                    showToast('Deleted.', 'error');
+                };
                 libraryList.appendChild(div);
             });
         }
+
+        librarySearch.addEventListener('input', () => updateLibraryUI(librarySearch.value.trim()));
+        clearBtn.addEventListener('click', () => {
+            postIdeaInput.value = ''; charCounter.textContent = '0 / 3000'; progressFill.style.width = '0%';
+            document.getElementById('audience').value = ''; document.getElementById('cta').value = '';
+            postOutput.innerHTML = ''; compareBtn.style.display = 'none';
+        });
     });
 }

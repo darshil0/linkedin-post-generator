@@ -38,7 +38,7 @@
 
                     <div class="control-row">
                         <div class="input-group">
-                            <label for="post-type">Post Type</label>
+                            <label for="post-type">Post Type <span class="tooltip-trigger" data-tooltip="Choose a strategic framework for your content.">?</span></label>
                             <select id="post-type">
                                 <option value="thought_leadership">Thought Leadership</option>
                                 <option value="story">Personal Story</option>
@@ -68,7 +68,7 @@
                     </div>
 
                     <div class="input-group">
-                        <label>Post Tone</label>
+                        <label>Post Tone <span class="tooltip-trigger" data-tooltip="Professional uses formal language; Casual is more conversational.">?</span></label>
                         <div class="radio-group">
                             <input type="radio" id="tone-professional" name="tone" value="professional" checked>
                             <label for="tone-professional">Professional</label>
@@ -85,8 +85,10 @@
 
                     <div class="button-group">
                         <button id="generate-btn" aria-label="Generate post drafts">Generate Drafts</button>
+                        <button id="compare-btn" class="secondary-btn" style="display: none;" aria-label="Compare all variations">Compare Hooks</button>
                         <button id="clear-btn" class="secondary-btn" aria-label="Clear all inputs">Clear</button>
                     </div>
+                    <input type="file" id="avatar-upload" style="display: none;" accept="image/*">
                 </div>
 
                 <div id="post-output" aria-live="polite">
@@ -110,6 +112,14 @@
     </div>
 
     <div id="toast-container"></div>
+
+    <div id="comparison-modal" class="comparison-modal">
+        <div class="comparison-content">
+            <span id="close-modal" class="close-modal">&times;</span>
+            <h3>Compare Hook Variations</h3>
+            <div id="comparison-grid" class="comparison-grid"></div>
+        </div>
+    </div>
 
     <script src="src/script.js" type="module"></script>
 </body>
