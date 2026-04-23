@@ -56,3 +56,10 @@ A high-fidelity preview component that mimics the social platform.
 - **Interaction**: Buttons lift on hover and depress on click.
 - **Pulsing**: The character counter uses a `pulseRed` scale animation when the 3,000-character limit is breached.
 - **Modals**: The comparison grid uses `backdrop-filter: blur(8px)` to create a focused, high-end viewing environment.
+
+## Technical styling standards
+
+PostGenius adheres to the **Google HTML/CSS Style Guide** for all visual implementations:
+- **Alphabetical properties**: All CSS properties within a declaration block are sorted alphabetically for maximum readability and predictable overrides.
+- **Lowercase standard**: All selectors and attribute values use lowercase to ensure cross-browser consistency and valid HTML5 syntax.
+- **2-space indentation**: Maintained across all styling files for a clean, hierarchical structure.

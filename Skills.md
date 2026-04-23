@@ -5,6 +5,7 @@ This project demonstrates proficiency in modern, vanilla web development. Below 
 ## Frontend architecture
 - **Vanilla ES6+ mastery**: Advanced DOM manipulation, event delegation, and state management without frameworks.
 - **ES Modules (ESM)**: Implementing a modular, future-proof codebase that works natively in the browser and across testing environments.
+- **Google coding standards**: Strict adherence to the **Google JavaScript Style Guide** and **Google HTML/CSS Style Guide**.
 - **Asynchronous logic**: Managing clipboard APIs and simulated generation delays for a premium experience.
 
 ## Modern styling and UX
@@ -18,9 +19,9 @@ This project demonstrates proficiency in modern, vanilla web development. Below 
 - **Robustness and error handling**: Implementing `try-catch` wrappers and input sanitization to prevent data corruption and security vulnerabilities.
 
 ## Testing and quality assurance
-- **Unit testing with Vitest**: Architecting logic to be purely functional and testable, ensuring 100% reliability of the generation engine.
-- **CI/CD readiness**: Maintaining a structure compatible with automated GitHub Actions deployment.
-- **Linting and standards**: Strict adherence to ESLint rules for codebase consistency.
+- **Unit testing with Vitest**: Architecting logic to be purely functional and testable, ensuring high reliability of the generation engine.
+- **Enterprise-grade CI/CD**: Implementing a robust GitHub Actions pipeline with automated **Quality Gates** (Linting and Unit Testing) before deployment.
+- **Automated linting**: Utilizing ESLint with custom configurations to enforce code quality across the entire project.
 
 ## Content strategy
 - **Framework implementation**: Translating proven LinkedIn marketing strategies into programmatic templates.
