@@ -1,43 +1,56 @@
 # Changelog
 
-All notable changes to the LinkedIn Post Architect project will be documented in this file.
+All notable changes to PostGenius (LinkedIn Post Architect) are documented here.
+
+## [1.4.1] - 2026-04-23
+### Fixed
+- Removed unused `type` parameter from `getCTAs()` function definition and all call sites (ESLint warning).
+- Applied global regex flags to casual-tone replacements in `getHooks()` — previously only the first match was replaced per string.
+- Removed inline casual-tone overrides from `lesson` and `educational` hook templates that were already correct, reducing redundant replacements.
+- Cleaned `package.json`: removed all unused dependencies (React, Vite, Firebase, Tailwind, TypeScript, Express, Lucide) that had accumulated from earlier experiments. Runtime now has zero dependencies; ESLint and Vitest remain as dev-only tools.
+- Bumped `package.json` version to `1.4.0` to match current release and set `"type": "module"` for correct ES module resolution in tests.
+- Updated `README.md` to accurately reflect the vanilla JS / CSS architecture, project structure, and setup steps. Removed references to React, Vite, and Tailwind that no longer apply.
+
+### Notes
+- Firebase config files (`firebase-applet-config.json`, `firebase-blueprint.json`, `firestore.rules`) should be deleted from the repository. They are unused legacy artifacts from an earlier Firebase reference implementation and one contains a hardcoded API key.
+- `vite.config.ts` and `tsconfig.json`, if still present, can also be deleted — the project has no build step.
 
 ## [1.4.0] - 2026-04-23
 ### Added
-- **Copy to Clipboard**: One-click functionality to copy generated posts to the clipboard.
-- **Clear Form**: Added a button to quickly reset all input fields.
-- **Character Counter**: Real-time character count for the post idea input.
-- **Accessibility Enhancements**: Added ARIA labels and improved semantic structure for better screen reader support.
+- Copy to Clipboard: one-click copy for generated posts.
+- Clear Form button to reset all inputs.
+- Real-time character counter on the post idea textarea.
+- ARIA labels and improved semantic structure for screen reader support.
 
 ### Changed
-- **Dependency Updates**: Upgraded core development tools (ESLint and Vitest) to their latest versions.
-- **UI Refinements**: Improved styling for interactive elements and feedback mechanisms.
-- **Codebase Consolidation**: Unified documentation and removed redundant changelog files.
+- Upgraded ESLint and Vitest to latest versions.
+- UI refinements for interactive elements and feedback states.
+- Consolidated documentation; removed duplicate changelog files.
 
 ## [1.3.0] - 2026-04-22
 ### Added
-- **Architecture Library**: Implemented local persistence using `localStorage`, allowing users to save and manage drafts.
-- **Enhanced UI/UX**: Completely redesigned the interface with a professional two-pane layout, improved typography, and smooth animations.
-- **Elite Generation Engine**: Refined the template logic to follow "The Slide" and "Pattern Interrupt" content strategies.
-- **Toast Notifications**: Added non-intrusive feedback for user actions like saving and deleting.
+- Architecture Library: `localStorage`-backed draft persistence — save, view, and delete drafts across sessions.
+- Redesigned interface with a two-pane layout, improved typography, and fade-in animations.
+- Refined template logic following "The Slide" and "Pattern Interrupt" content strategies.
+- Toast notifications for save, delete, copy, and error states.
 
 ### Changed
-- **Tech Stack Cleanup**: Synchronized codebase to use Vanilla JS as the source of truth, removing unused React/Vite dependencies from the active runtime logic.
+- Removed unused React/Vite runtime references from active application code. Vanilla JS is now the sole source of truth.
 
 ## [1.2.0] - 2026-04-22
 ### Added
-- **Firebase Integration**: Full user authentication (Google login) and Cloud Firestore persistence (Reference version).
-- **My Library**: A workspace where users can save, delete, and reload post drafts.
-- **Enhanced UI Feedback**: Replaced standard alerts with inline success/error states and checkmark animations.
+- Firebase Authentication (Google login) and Cloud Firestore persistence — reference implementation only, not active in current build.
+- My Library workspace for saving, deleting, and reloading drafts.
+- Inline success/error states replacing standard browser alerts.
 
 ### Changed
-- **Elite Prompt Strategy**: Major overhaul of the AI system instructions to follow top-tier content strategy.
+- Major overhaul of post generation templates for stronger hook quality.
 
 ## [1.1.0] - 2026-04-22
 ### Added
-- **Clean Minimalism Theme**: Applied a refined professional aesthetic with a two-pane layout and slate/blue color palette.
-- **Alternate Versions**: Support for generating multiple hook variations.
+- Two-pane layout with slate/blue color palette.
+- Alternate hook variations per generated post.
 
 ## [1.0.0] - 2026-04-22
 ### Added
-- **Initial Release**: Core generation logic, style/tone selection, and basic LinkedIn mockup preview.
+- Initial release: core generation logic, style and tone selection, LinkedIn mockup preview.
