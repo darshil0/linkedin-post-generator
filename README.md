@@ -19,7 +19,7 @@ PostGenius is a high-fidelity, lightweight LinkedIn post generator designed for 
 - **Skeleton generation**: Use shimmering states that simulate AI processing for a premium experience.
 - **Comparison grid**: Use the side-by-side view to evaluate all generated variations simultaneously.
 - **Interactive feedback**: Get instant feedback with particle confetti on save and pulsing character count alerts.
-- **Inline editor**: Edit your generated drafts directly in the UI before you save them.
+- **Enterprise-grade standards**: Entire codebase follows the **Google Coding Standards** for JavaScript, HTML, and CSS.
 - **Dark mode support**: Toggle between light and dark themes for a personalized experience.
 - **Architecture library**: Save and search your post blueprints locally with SVG-enhanced empty states.
 - **Modern ESM foundation**: Built with standard ES Modules for a future-proof architecture.
@@ -65,7 +65,7 @@ To start generating posts, follow these steps:
 ├── Skills.md           # Technical competencies
 ├── Design.md           # Design system and aesthetic
 ├── AGENTS.md           # AI contributor instructions
-├── package.json        # Tooling configuration (v1.6.0)
+├── package.json        # Tooling configuration (v1.7.0)
 ├── LICENSE             # MIT License
 └── .github/            # GitHub Actions
     └── workflows/

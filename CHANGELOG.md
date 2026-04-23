@@ -2,6 +2,13 @@
 
 All notable changes to PostGenius (LinkedIn post architect) are documented here.
 
+## [1.7.0] - 2026-04-23
+### Changed
+- **Full Codebase Refactor**: Standardized all JavaScript, HTML, and CSS to comply with the Google Coding Standards.
+- **JavaScript Modernization**: Implemented JSDoc documentation, camelCase naming, and 2-space indentation.
+- **HTML/CSS Optimization**: Alphabetized all CSS properties and standardized HTML attribute ordering for improved maintainability.
+- **Documentation Overhaul**: Aligned all Markdown files with the Google Developer Documentation Style Guide.
+
 ## [1.6.0] - 2026-04-23
 ### Added
 - **Skeleton loaders**: Implemented shimmering states for content generation to simulate AI processing.

@@ -27,12 +27,13 @@ PostGenius is a high-fidelity static web application built with HTML5, CSS3, and
 ├── Skills.md               # Technical competency guide
 ├── Design.md               # Design system specification
 ├── AGENTS.md               # This file
-├── package.json            # Dev tooling and metadata (v1.6.0)
+├── package.json            # Dev tooling and metadata (v1.7.0)
 ├── LICENSE                 # MIT License
 └── .github/                # Automation workflows
 ```
 
 ## Coding conventions
+- **Standards**: Strictly follow the **Google JavaScript Style Guide** and **Google HTML/CSS Style Guide**.
 - **ES Modules**: Always use `export` for functional logic in `src/script.js`. Import these functions in `tests/script.test.js`.
 - **Theming**: Use HSL CSS variables for colors to support dark and light modes.
 - **Micro-interactions**: Maintain the high-fidelity feel by using the built-in skeleton loader (`.skeleton`), confetti system (`createConfetti()`), and pulse animations.
