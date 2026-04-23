@@ -1,61 +1,81 @@
 # PostGenius — LinkedIn Post Architect
 
-PostGenius is a lightweight LinkedIn post generator built for professionals who know what they want to say but need help saying it well. Feed it a rough idea, pick a framework, and get a structured draft in seconds — no account, no backend, no build step.
+![PostGenius Mockup](C:\Users\mayan\.gemini\antigravity\brain\779c62d5-5c60-47a6-b417-edf5777809ac\postgenius_mockup_v1_1776978634938.png)
 
-## What It Does
+PostGenius is a high-fidelity, lightweight LinkedIn post generator designed for creators and professionals. It transforms raw ideas into structured, high-performing drafts using proven content frameworks—all without leaving your browser.
 
-PostGenius applies real content strategy — hooks like "The Slide" and "Pattern Interrupt," post styles ranging from Thought Leadership to Personal Story — so your output follows the patterns that actually perform on LinkedIn, not just fill a text box.
+## ✨ Key Features
 
-Every generation includes alternate hook options alongside the main draft. Drafts you like go straight to a local library in your browser, where you can review, copy, or delete them at any time. All data lives in `localStorage`; nothing leaves your browser.
+- **Strategic Frameworks**: Choose from Thought Leadership, Personal Story, Lesson Learned, or Educational templates.
+- **Dynamic Tones**: Switch between *Professional* and *Casual* voices with real-time word replacement.
+- **Architecture Library**: Save your best blueprints locally using browser `localStorage` for future refinement.
+- **Pattern Interrupts**: Every generation provides multiple "Hook" variations to stop the scroll.
+- **Optimized CTAs**: Tailor your Call to Action or use high-converting defaults.
+- **Automated Hashtags**: AI-suggested tags based on your core topic.
+- **Modern ESM Foundation**: Built with standard ES Modules for a future-proof, no-build-step architecture.
 
-**Configuration options:** post style (Thought Leadership, Personal Story, Lesson Learned, Educational), tone (Professional or Casual), length (Short / Medium / Long), and target audience.
+## 🧠 Content Strategy
 
-## Tech Stack
+PostGenius doesn't just "write text." It follows the **"The Slide"** methodology:
+1.  **The Hook**: A pattern-interrupting opening line to grab attention.
+2.  **The Body**: Structured content that provides immediate value or insight.
+3.  **The CTA**: A clear, low-friction invitation to engage.
 
-Vanilla HTML5 and CSS3 with an ES6+ JavaScript core. No frameworks, no build tools, no external runtime dependencies. Draft persistence uses browser `localStorage`. Layout is fully responsive via CSS Grid and Flexbox. Vitest handles unit tests; ESLint keeps the codebase consistent.
+## 🚀 Quick Start
 
-## Project Structure
+1.  **Open**: Simply open `index.html` in any modern web browser.
+2.  **Ideate**: Enter your core topic (e.g., "Why sleep is the ultimate productivity hack").
+3.  **Configure**: Select your preferred style, length, and target audience.
+4.  **Generate**: Click "Generate Drafts" and watch your post come to life.
+5.  **Refine**: Copy to clipboard or save to your personal library.
+
+## 🛠️ Tech Stack
+
+- **Core**: Vanilla HTML5, CSS3, and ES6+ JavaScript (ES Modules).
+- **Styling**: LinkedIn-inspired slate and blue palette with a fully responsive two-pane grid layout.
+- **Persistence**: Zero-backend `localStorage` for draft management.
+- **Testing**: Vitest for robust unit testing of generation logic.
+- **Linting**: ESLint for maintaining code consistency.
+
+## 📁 Project Structure
 
 ```
 .
-├── index.html          # Main HTML file
-├── style.css           # All styling
-├── script.js           # All application logic
-├── script.test.js      # Vitest unit tests
-├── README.md           # This file
-├── CHANGELOG.md        # Version history
-├── AGENTS.md           # Agent/contributor instructions
-├── package.json        # Dev tooling (ESLint, Vitest)
-├── .gitignore
-├── LICENSE
+├── index.html          # Semantic HTML5 Structure
+├── style.css           # Premium CSS3 with Variables & Animations
+├── script.js           # ES Module Logic & DOM Interaction
+├── script.test.js      # Vitest Unit Tests
+├── README.md           # Documentation
+├── CHANGELOG.md        # Version & Fix History
+├── AGENTS.md           # Developer & AI Contributor Instructions
+├── package.json        # Tooling Configuration (v1.4.1)
+├── LICENSE             # MIT License
 └── .github/
     └── workflows/
-        └── static.yml  # GitHub Pages deployment
+        └── static.yml  # Automated GitHub Pages Deployment
 ```
 
-## Getting Started
+## 👨‍💻 Development
 
-Open `index.html` directly in a browser — no install needed for basic use.
-
-1. Enter your core idea in the text area.
-2. Select post style, length, and target audience.
-3. Click **Generate Drafts** to see your post and alternate hooks.
-4. Save drafts to your library, copy them to clipboard, or clear the form and start fresh.
-
-## Development
-
-Install dev dependencies for linting and testing:
+PostGenius is designed for speed. No build step is required for basic development, but you can use the following tools for maintenance:
 
 ```bash
+# Install development dependencies (ESLint, Vitest)
 npm install
-npm run lint    # ESLint
-npm run test    # Vitest
+
+# Run unit tests
+npm run test
+
+# Run linter
+npm run lint
 ```
 
-## Security
+## 🔒 Security & Privacy
 
-All user input is rendered with `textContent` — never `innerHTML` — to prevent XSS. No data is sent to any server. There are no API keys or secrets in this repository.
+- **Privacy First**: All generation happens locally in your browser. No data is sent to external servers.
+- **XSS Prevention**: Strict use of `textContent` and `createTextNode` for all user-provided data rendering.
+- **Zero Secrets**: No API keys, no databases, and no tracking scripts.
 
-## License
+## 📜 License
 
-MIT — see [LICENSE](LICENSE).
+Distributed under the MIT License. See `LICENSE` for more information.
