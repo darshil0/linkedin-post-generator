@@ -82,6 +82,18 @@ h2 {
     margin-bottom: 1.5rem;
 }
 
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.char-counter {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
 label {
     display: block;
     margin-bottom: 0.5rem;
@@ -174,6 +186,22 @@ button:active {
     transform: scale(0.98);
 }
 
+.button-group {
+    display: flex;
+    gap: 1rem;
+}
+
+.secondary-btn {
+    background-color: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+
+.secondary-btn:hover {
+    background-color: var(--border-color);
+    color: var(--text-main);
+}
+
 /* Post Output */
 #post-output {
     margin-top: 2rem;
@@ -219,6 +247,18 @@ button:active {
 
 .save-btn:hover {
     background-color: var(--accent-green-hover);
+}
+
+.copy-btn {
+    background-color: var(--primary-blue);
+    width: auto;
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+}
+
+.copy-btn:hover {
+    background-color: var(--primary-blue-hover);
 }
 
 .post-section {

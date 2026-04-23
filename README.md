@@ -9,7 +9,9 @@ PostGenius is a lightweight, high-performance LinkedIn post generator designed f
 - **Customizable Output**: Adjust tone (Professional/Casual), length, and target audience.
 - **Architecture Library**: Save your favorite drafts locally in your browser to refine and use later.
 - **Optimized Hook Options**: Provides multiple alternate hooks for every generated post to maximize engagement.
-- **One-Click Management**: Easily save, view, or delete drafts from your personal library.
+- **One-Click Management**: Easily save, view, copy, or delete drafts from your personal library.
+- **New: Copy to Clipboard**: Quickly copy your favorite drafts to use directly on LinkedIn.
+- **Accessibility Focused**: Built with semantic HTML and ARIA labels for an inclusive user experience.
 
 ## Technical Architecture
 
@@ -18,13 +20,14 @@ PostGenius is a lightweight, high-performance LinkedIn post generator designed f
 - **Persistence**: Browser `localStorage` for draft management.
 - **Responsiveness**: Fully responsive CSS Grid/Flexbox layout.
 - **Testing**: Vitest for core logic verification.
+- **Tooling**: ESLint for code quality and standardization.
 
 ## Getting Started
 
 1. **Input Your Topic**: Enter your core idea in the text area.
 2. **Configure Strategy**: Select the post type, length, and target audience.
 3. **Generate**: Click "Generate Drafts" to see your structured LinkedIn post and alternate hooks.
-4. **Save**: Use "Save to Library" to keep your drafts for future use.
+4. **Manage**: Save your drafts to the library, copy them to your clipboard, or clear the form to start over.
 
 ## Development
 
