@@ -1,97 +1,84 @@
 # Agent Instructions: LinkedIn Post Architect
 
-You are an AI agent tasked with maintaining and improving the LinkedIn Post Architect.
+You are an AI agent tasked with maintaining and improving the LinkedIn Post Architect (PostGenius).
 
 ## Project Overview
-This is a static web application built with HTML, CSS, and vanilla JavaScript. It allows users to generate LinkedIn post templates based on an idea, tone, and format. The application is deployed to GitHub Pages with no build step required.
+This is a high-fidelity static web application built with HTML5, CSS3, and modern ES Modules. It allows users to generate strategic LinkedIn posts using proven content frameworks. The application is deployed via GitHub Pages with a focus on local privacy and zero-build complexity.
 
 ## Tech Stack
-- **Frontend**: Vanilla ES6+ JavaScript, CSS3 (Modern Flexbox/Grid), Semantic HTML5
-- **Persistence**: Browser `localStorage` for local draft management
-- **Deployment**: Static GitHub Pages via GitHub Actions
-
-## Coding Conventions
-- **HTML**: Use semantic HTML5 elements. Keep `index.html` clean and well-structured.
-- **CSS**: Use modern CSS practices. Ensure the application is responsive and follows the LinkedIn color palette (e.g., `#0077b5` for primary buttons). Use CSS custom properties (variables) for theming.
-- **JavaScript**: Use vanilla ES6+ JavaScript with no external dependencies. Maintain all logic in `script.js`. Avoid jQuery, React, frameworks, or build tools.
+- **Frontend**: Vanilla ES6+ JavaScript (ES Modules), CSS3 (HSL Variables, Glassmorphism, CSS Grid).
+- **Tooling**: Vitest (Testing), ESLint (Linting).
+- **Persistence**: Browser `localStorage` with JSON serialization and robust error handling.
+- **Deployment**: Static GitHub Pages via GitHub Actions.
 
 ## Project Structure
 ```
 .
-├── index.html                          # Main HTML file
-├── style.css                           # All styling
-├── script.js                           # All JavaScript logic
-├── README.md                           # User documentation
-├── CHANGELOG.md                        # Version history
-├── AGENTS.md                           # This file
-├── .gitignore                          # Git ignore rules
-├── LICENSE                             # MIT License
-└── .github/
-    └── workflows/
-        └── static.yml                  # GitHub Actions deployment
+├── index.html              # Main Entry (Imports src/script.js as module)
+├── src/
+│   ├── script.js           # Core Business Logic & DOM (ESM)
+│   └── style.css           # Premium Design System (HSL themes)
+├── tests/
+│   └── script.test.js      # Vitest Test Suite
+├── assets/
+│   └── mockup.png          # UI Mockup Asset
+├── README.md               # User Documentation
+├── CHANGELOG.md            # Version & Change History
+├── Skills.md               # Technical Competency Guide
+├── Design.md               # Design System Specification
+├── AGENTS.md               # This File
+├── package.json            # Dev Tooling & Metadata
+├── LICENSE                 # MIT License
+└── .github/                # Automation Workflows
 ```
 
-**Files to Remove** (legacy configuration):
-- `package.json` (optional - only if you add dependencies)
-- `vite.config.ts` (not used)
-- `tsconfig.json` (not used for vanilla JS)
-- `firebase-*.json` (archived reference, not used)
-- `.env.example` (static app has no secrets)
+## Coding Conventions
+- **ES Modules**: Always use `export` for functional logic in `src/script.js`. Import these in `tests/script.test.js`.
+- **Theming**: Use HSL CSS variables for colors to support Dark/Light mode seamlessly.
+- **Glassmorphism**: Maintain the premium look using `backdrop-filter` and subtle hsla-based borders.
+- **Security**: Strictly use `textContent` or `createTextNode` for rendering user data. Avoid `innerHTML` with dynamic content.
+- **Robustness**: Wrap `localStorage` and `JSON.parse` operations in `try-catch` blocks.
 
 ## Workflow
-- **Changes**: When adding features, update `index.html`, `style.css`, and `script.js` accordingly.
-- **Documentation**: Always update `README.md` and `CHANGELOG.md` after significant changes.
-- **Deployment**: The project automatically deploys via GitHub Pages when changes are pushed to the `main` branch.
+- **Code Changes**: Logic and UI changes should be made in `src/script.js` and `src/style.css`.
+- **Testing**: Run `npm run test` after any logic changes to ensure no regressions in the generation engine.
+- **Documentation**: Update `README.md` and `CHANGELOG.md` for every release. Ensure `Design.md` is updated if the color palette or UI components change.
 
 ## Verification
-- Before submitting, verify changes by opening `index.html` in a browser.
-- Use browser DevTools to check for console errors.
-- Test all interactive features (generate, save, delete, view).
-- Verify localStorage persistence works correctly.
-
-## Security
-- All user input is treated as plain text and rendered using `textContent` to prevent XSS. Maintain this practice strictly.
-- Do not use `innerHTML` with user-provided content.
-- All data is stored locally in the browser—no backend communication.
-
-## Performance Tips
-- Minimize DOM manipulation; batch updates where possible.
-- Use event delegation for dynamically created elements.
-- Keep CSS selectors simple and efficient.
-- Avoid reflows/repaints by grouping style changes.
+- **Functional**: Verify generation, editing, saving, and searching.
+- **Visual**: Test Dark/Light mode toggling and responsiveness at 600px, 950px, and 1200px.
+- **Persistence**: Ensure edits to drafts persist in the Architecture Library across reloads.
+- **Console**: Monitor browser DevTools for any uncaught errors or performance warnings.
 
 ## localStorage Data Structure
-Posts are stored as JSON in `post_library` key:
+Posts are stored as JSON in the `post_library` key:
 ```javascript
 {
   id: number,                    // Timestamp-based unique ID
-  post_type: string,             // Dropdown selection value
-  hook: string,                  // Pattern interrupt hook
+  post_type: string,             // Framework type (e.g., 'story')
+  hook: string,                  // Scroll-stopping opening
   post: string,                  // Main body content
   cta: string,                   // Call to action
-  hashtags: string[],            // Array of hashtags
-  idea: string,                  // Original user input
-  alt_versions: [{hook}, ...]    // Alternate hooks
+  hashtags: string[],            // Optimized tags
+  idea: string,                  // User's original topic
+  alt_versions: [{hook}, ...]    // Other generated hooks
 }
 ```
 
 ## Common Tasks
 
 ### Adding a New Post Type
-1. Add option to `<select id="post-type">` in `index.html`
-2. Add templates to `getHooks()`, `getBodies()` in `script.js`
-3. Test with various tones and lengths
-4. Update CHANGELOG.md
+1. Add an `<option>` to the `#post-type` select in `index.html`.
+2. Expand the `templates` object in `src/script.js` -> `getHooks()`.
+3. Add specialized logic to `getBodies()` if needed.
+4. Update unit tests in `tests/script.test.js` to cover the new type.
 
-### Styling Changes
-1. Modify variables in `:root { }` at top of `style.css`
-2. Update component classes as needed
-3. Test responsiveness at 600px, 900px, 1100px breakpoints
-4. Verify no console errors
+### Modifying the Design
+1. Update HSL variables in `src/style.css` (both light and dark themes).
+2. Ensure new components adhere to the Glassmorphism standards in `Design.md`.
+3. Verify that transitions and entrance animations remain smooth.
 
-### Bug Fixes
-1. Identify the issue and reproduce it
-2. Fix in the relevant file (`index.html`, `style.css`, or `script.js`)
-3. Test the fix thoroughly
-4. Update CHANGELOG.md with "Fixed" section
-5. Commit with a descriptive message
+### Handling New Input Fields
+1. Update the generation logic in `src/script.js` to accept the new input.
+2. Ensure the LinkedIn Mockup logic is updated to visualize the new data.
+3. Update the `localStorage` schema documentation if the saved object changes.
