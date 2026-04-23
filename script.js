@@ -8,16 +8,16 @@ function getHooks(idea, type, tone) {
         ],
         story: [
             `I almost quit when I first started with ${idea}.`,
-            `A simple conversation about ${idea} changed my entire career trajectory.`,
+            `A simple conversation about ${idea} changed my entire career path.`,
             `I used to be afraid of ${idea}.\n\nUntil I realized this one truth.`
         ],
         lesson: [
             `The biggest lesson I've learned about ${idea} is also the simplest.`,
-            `Stop trying to "master" ${idea}.\n\nStart trying to understand the foundation.`,
+            `Stop trying to get good at ${idea}.\n\nStart trying to understand the foundation.`,
             `If I could go back and give my younger self advice on ${idea}, I'd say this:`
         ],
         educational: [
-            `How to master ${idea} (without the 10,000 hours).`,
+            `How to get good at ${idea} (without the 10,000 hours).`,
             `The 3-step framework for ${idea} that actually works.`,
             `Most people fail at ${idea} because they miss this one step.`
         ]
@@ -25,7 +25,11 @@ function getHooks(idea, type, tone) {
 
     let result = templates[type] || templates.thought_leadership;
     if (tone === 'casual') {
-        result = result.map(h => h.replace('trajectory', 'path').replace(/Master/g, 'get good at').replace(/master/g, 'get good at'));
+        result = result.map(h =>
+            h.replace('trajectory', 'path')
+             .replace(/Master/g, 'get good at')
+             .replace(/master/g, 'get good at')
+        );
     }
     return result;
 }
@@ -49,6 +53,7 @@ function getBodies(idea, type, tone, audience, length) {
     return [variation1];
 }
 
+// Note: `pref` is the user-supplied CTA preference; returns default if empty.
 function getCTAs(pref) {
     return [pref || "What's the one thing you'd add to this?"];
 }
