@@ -1,35 +1,31 @@
-# LinkedIn Post Architect (PostGenius)
+# PostGenius — LinkedIn Post Architect
 
-PostGenius is a lightweight, high-performance LinkedIn post generator designed for content strategists and professionals. It helps transform rough ideas into structured, engaging LinkedIn posts using proven content frameworks.
+PostGenius is a lightweight LinkedIn post generator built for professionals who know what they want to say but need help saying it well. Feed it a rough idea, pick a framework, and get a structured draft in seconds.
 
-## Key Features
+## What It Does
 
-- **Strategic Frameworks**: Generates posts using professional techniques like "The Slide" and "Pattern Interrupt" hooks.
-- **Post Style Selection**: Choose between Thought Leadership, Personal Story, Lesson Learned, or Educational styles.
-- **Customizable Output**: Adjust tone (Professional/Casual), length, and target audience.
-- **Architecture Library**: Save your favorite drafts locally in your browser to refine and use later.
-- **Optimized Hook Options**: Provides multiple alternate hooks for every generated post to maximize engagement.
-- **One-Click Management**: Easily save, view, copy, or delete drafts from your personal library.
-- **New: Copy to Clipboard**: Quickly copy your favorite drafts to use directly on LinkedIn.
-- **Accessibility Focused**: Built with semantic HTML and ARIA labels for an inclusive user experience.
+PostGenius applies real content strategy — hooks like "The Slide" and "Pattern Interrupt," post styles ranging from Thought Leadership to Personal Story — so your output follows the patterns that actually perform on LinkedIn, not just fill a text box.
 
-## Technical Architecture
+Every generation gives you alternate hook options alongside your main draft, so you're not stuck with one angle. Drafts you like go straight to a local library in your browser, where you can review, copy, or delete them at any time.
 
-- **Frontend**: Vanilla HTML5, Semantic CSS3.
-- **Logic**: ES6+ JavaScript (Modular design for testability).
-- **Persistence**: Browser `localStorage` for draft management.
-- **Responsiveness**: Fully responsive CSS Grid/Flexbox layout.
-- **Testing**: Vitest for core logic verification.
-- **Tooling**: ESLint for code quality and standardization.
+**Configuration options:** post style (Thought Leadership, Personal Story, Lesson Learned, Educational), tone (Professional or Casual), length, and target audience.
+
+## Tech Stack
+
+Vanilla HTML5 and CSS3 with an ES6+ JavaScript core designed for modularity and testability. Draft persistence uses browser `localStorage` — no backend, no account required. Layout is fully responsive via CSS Grid and Flexbox. Vitest handles unit tests; ESLint keeps the codebase consistent.
 
 ## Getting Started
 
-1. **Input Your Topic**: Enter your core idea in the text area.
-2. **Configure Strategy**: Select the post type, length, and target audience.
-3. **Generate**: Click "Generate Drafts" to see your structured LinkedIn post and alternate hooks.
-4. **Manage**: Save your drafts to the library, copy them to your clipboard, or clear the form to start over.
+1. Enter your core idea in the text area.
+2. Select post style, length, and audience.
+3. Click **Generate Drafts** to see your post and alternate hooks.
+4. Save drafts to your library, copy them to clipboard, or clear the form and start fresh.
 
 ## Development
 
-- **Linting**: `npm run lint`
-- **Testing**: `npm run test`
+```bash
+npm run lint    # ESLint
+npm run test    # Vitest
+```
+
+---
