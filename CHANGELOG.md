@@ -2,6 +2,21 @@
 
 All notable changes to PostGenius (LinkedIn Post Architect) are documented here.
 
+## [1.5.0] - 2026-04-23
+### Added
+- **Interactive LinkedIn Preview**: A live mockup section that visualizes exactly how your post will look on the platform.
+- **Inline Draft Editing**: All generated sections (Hook, Body, CTA, Tags) are now editable directly in the UI before saving.
+- **Library Search**: Real-time filtering for the Architecture Library to find old drafts instantly.
+- **Dark Mode**: High-fidelity dark theme with a manual toggle and persistence.
+- **Advanced Character Progress**: Visual progress bar with color-coded alerts for LinkedIn's 3,000-character limit.
+- **Expanded Template Engine**: Added 20+ new hook and body variations for better variety.
+- **Documentation**: Added `Skills.md` and `Design.md` to the codebase.
+
+### Changed
+- Refactored project structure: moved core files to `src/` and tests to `tests/`.
+- Optimized `localStorage` operations with robust error handling and duplicate prevention.
+- Upgraded the UI with a premium Glassmorphism aesthetic and Inter typography.
+
 ## [1.4.1] - 2026-04-23
 ### Added
 - Converted project to use ES Modules (ESM) for better consistency with modern JS standards and test environment.
