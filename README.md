@@ -1,4 +1,4 @@
-# PostGenius — LinkedIn Post Architect
+# PostGenius(LinkedIn Post Architect)
 
 PostGenius is a lightweight LinkedIn post generator built for professionals who know what they want to say but need help saying it well. Feed it a rough idea, pick a framework, and get a structured draft in seconds.
 
