@@ -33,12 +33,24 @@ PostGenius follows the **"The Slide"** methodology to maximize engagement:
 
 ## Quick start
 
-To start generating posts, follow these steps:
-1.  **Open**: Open `index.html` in any modern web browser.
-2.  **Ideate**: Enter your core topic in the input field.
-3.  **Configure**: Select your preferred style, length, and target audience.
-4.  **Generate**: Click **Generate Drafts** to create your post.
-5.  **Refine**: Edit your draft, then copy it to your clipboard or save it to your library.
+PostGenius is a static application. You can use it in two ways:
+
+1.  **Production**: Visit the live app at [https://darshil0.github.io/linkedin-post-generator/](https://darshil0.github.io/linkedin-post-generator/).
+2.  **Local**: Open `index.html` in any modern web browser.
+
+### Basic workflow
+1.  **Ideate**: Enter your core topic in the input field.
+2.  **Configure**: Select your preferred style, length, and target audience.
+3.  **Generate**: Click **Generate Drafts** to create your post.
+4.  **Refine**: Edit your draft directly, then copy it or save it to your library.
+
+## Content frameworks
+
+PostGenius uses specialized logic for different content archetypes:
+- **Thought Leadership**: High-level insights designed to challenge the status quo.
+- **Personal Story**: Narrative-driven posts focused on vulnerability and lessons learned.
+- **Lesson Learned**: Practical takeaways from a specific project or experience.
+- **Educational**: How-to guides and frameworks to establish authority.
 
 ## Tech stack
 
@@ -86,6 +98,20 @@ npm run test
 # Run the linter
 npm run lint
 ```
+
+### CI/CD pipeline
+The project uses GitHub Actions for continuous integration. Every push to the `main` branch triggers an automated workflow that:
+1.  Installs dependencies.
+2.  Runs **ESLint** to ensure code standard compliance.
+3.  Runs **Vitest** to verify generation logic.
+4.  Deploys to **GitHub Pages** only if all checks pass.
+
+## Documentation
+For deeper technical details, refer to the following guides:
+- [Technical competencies](Skills.md): Core skills and technologies.
+- [Design system](Design.md): Aesthetic principles and HSL palette.
+- [Agent instructions](AGENTS.md): Guide for AI contributors.
+- [Changelog](CHANGELOG.md): Version history.
 
 ## Security and privacy
 
