@@ -1,41 +1,32 @@
 # LinkedIn Post Architect (PostGenius)
 
-PostGenius is an elite LinkedIn ghostwriter and content strategist app that transforms your rough notes into high-performing, authentic LinkedIn posts using the standard-setting Gemini AI.
+PostGenius is a lightweight, high-performance LinkedIn post generator designed for content strategists and professionals. It helps transform rough ideas into structured, engaging LinkedIn posts using proven content frameworks.
 
 ## Key Features
 
-- **Elite AI Generation**: Built on professional content strategy principles like "The Slide" sentence structure and pattern-interrupt hooks.
-- **Smart Style Selection**: Choose from various post types (Thought Leadership, Personal Story, Lesson Learned, and more).
-- **Tone Orchestration**: Adjust the voice to match your professional brand (Professional, Conversational, Bold, Inspirational, etc.).
-- **Interactive Library**: Secure Google authentication allows you to save your best drafts to a personal "Architecture Library" and resume them at any time.
-- **AI-Powered Scout Trends**: Discover what's viral on LinkedIn and Reddit in real-time. Uses Google Search grounding to ensure topics are current and relevant to today's professional zeitgeist.
-- **A/B Performance Testing**: Generate and compare two distinct psychological angles side-by-side to determine which hook and structure resonates most.
-- **Preference Learning Engine**: Your AI ghostwriter learns your taste. By "Marking as Winner" specific A/B variations, you bias future generations toward the structures you prefer.
-- **Recursive Refinement**: Don't like a specific paragraph? Use the refinement chat to ask the AI for specific adjustments without losing your progress.
-- **Advanced Scheduling**: Plan your content calendar by scheduling posts for future dates and times directly within the app.
-- **Live Preview Mockups**: See your post exactly how it will appear on LinkedIn, optimized for the "See more" click.
-- **Reflective CTAs**: Automatically generates thoughtful, integrated calls-to-action that drive meaningful engagement.
+- **Strategic Frameworks**: Generates posts using professional techniques like "The Slide" and "Pattern Interrupt" hooks.
+- **Post Style Selection**: Choose between Thought Leadership, Personal Story, Lesson Learned, or Educational styles.
+- **Customizable Output**: Adjust tone (Professional/Casual), length, and target audience.
+- **Architecture Library**: Save your favorite drafts locally in your browser to refine and use later.
+- **Optimized Hook Options**: Provides multiple alternate hooks for every generated post to maximize engagement.
+- **One-Click Management**: Easily save, view, or delete drafts from your personal library.
 
-## Technical Stack
+## Technical Architecture
 
-- **Frontend**: React 18, Vite, Tailwind CSS
-- **AI Engine**: Google Gemini (via `@google/genai`)
-- **Backend/Persistence**: Firebase Authentication, Cloud Firestore
-- **Animations**: Motion (f.k.a. Framer Motion)
-- **Icons**: Lucide React
+- **Frontend**: Vanilla HTML5, Semantic CSS3.
+- **Logic**: ES6+ JavaScript (Modular design for testability).
+- **Persistence**: Browser `localStorage` for draft management.
+- **Responsiveness**: Fully responsive CSS Grid/Flexbox layout.
+- **Testing**: Vitest for core logic verification.
 
 ## Getting Started
 
-1. **Input Your Topic**: Paste rough notes, a link, or just a few bullet points.
-2. **Configure Your Strategy**: Select the style and tone that fits your goal.
-3. **Generate**: Click generate and watch as the AI crafts multiple drafts using different psychological angles.
-4. **Login**: Sign in with Google to save your drafts for later.
-5. **Copy & Post**: One-click copy for the body, hook, and hashtags.
+1. **Input Your Topic**: Enter your core idea in the text area.
+2. **Configure Strategy**: Select the post type, length, and target audience.
+3. **Generate**: Click "Generate Drafts" to see your structured LinkedIn post and alternate hooks.
+4. **Save**: Use "Save to Library" to keep your drafts for future use.
 
-## Deployment Notes
+## Development
 
-### GitHub Pages Pathing
-This project is configured with `base: './'` in `vite.config.ts` to ensure compatibility with GitHub Pages sub-directory deployments.
-
-### Environment Variables
-For the Gemini AI to function in your deployed build, ensure you provide your `GEMINI_API_KEY` during the build process. If using GitHub Actions, add it as a Repository Secret and pass it to the build step.
+- **Linting**: `npm run lint`
+- **Testing**: `npm run test`

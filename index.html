@@ -1,13 +1,98 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PostGenius | LinkedIn Post Architect</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>PostGenius</h1>
+            <p class="tagline">LinkedIn Post Architect</p>
+        </header>
 
+        <div class="app-layout">
+            <section class="generator-section">
+                <div class="card">
+                    <h2>Post Generator</h2>
+                    <p class="subtitle">Draft high-performing LinkedIn content in seconds.</p>
+
+                    <div class="input-group">
+                        <label for="post-idea">What's the core idea of your post?</label>
+                        <textarea id="post-idea" placeholder="e.g., The importance of emotional intelligence in leadership..."></textarea>
+                    </div>
+
+                    <div class="control-row">
+                        <div class="input-group">
+                            <label for="post-type">Post Type</label>
+                            <select id="post-type">
+                                <option value="thought_leadership">Thought Leadership</option>
+                                <option value="story">Personal Story</option>
+                                <option value="lesson">Lesson Learned</option>
+                                <option value="educational">Educational</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="length">Target Length</label>
+                            <select id="length">
+                                <option value="short">Short (Punchy)</option>
+                                <option value="medium" selected>Medium (Standard)</option>
+                                <option value="long">Long (Deep Dive)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-row">
+                        <div class="input-group">
+                            <label for="audience">Target Audience (Optional)</label>
+                            <input type="text" id="audience" placeholder="e.g., Tech Founders">
+                        </div>
+                        <div class="input-group">
+                            <label for="cta">Custom CTA (Optional)</label>
+                            <input type="text" id="cta" placeholder="e.g., What do you think?">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Post Tone</label>
+                        <div class="radio-group">
+                            <input type="radio" id="tone-professional" name="tone" value="professional" checked>
+                            <label for="tone-professional">Professional</label>
+
+                            <input type="radio" id="tone-casual" name="tone" value="casual">
+                            <label for="tone-casual">Casual</label>
+                        </div>
+                    </div>
+
+                    <div class="input-group checkbox-control">
+                        <input type="checkbox" id="include-hashtags" checked>
+                        <label for="include-hashtags">Include optimized hashtags</label>
+                    </div>
+
+                    <button id="generate-btn">Generate Drafts</button>
+                </div>
+
+                <div id="post-output">
+                    <!-- Generated posts will appear here -->
+                </div>
+            </section>
+
+            <section class="library-section">
+                <div class="card">
+                    <h2>Architecture Library</h2>
+                    <p class="subtitle">Your saved post blueprints.</p>
+                    <div id="library-list">
+                        <!-- Saved items will appear here -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
