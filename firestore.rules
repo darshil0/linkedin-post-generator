@@ -29,17 +29,31 @@ service cloud.firestore {
 
     // Phase 4: Entity Validation
     function isValidPost(data) {
-      return data.keys().hasAll(['userId', 'topic', 'post_type', 'hook', 'post', 'createdAt', 'updatedAt'])
-        && data.keys().size() <= 9
+      return data.keys().hasAll(['userId', 'topic', 'post_type', 'hook', 'post', 'status', 'createdAt', 'updatedAt'])
+        && data.keys().size() <= 11
         && data.userId == request.auth.uid
-        && data.topic is string && data.topic.size() <= 5000
+        && data.status in ['draft', 'scheduled']
+        && data.topic is string && data.topic.size() <= 10000
         && data.post_type is string && data.post_type.size() <= 50
         && data.hook is string && data.hook.size() <= 2000
         && data.post is string && data.post.size() <= 10000
         && (!data.keys().contains('cta') || (data.cta == null || (data.cta is string && data.cta.size() <= 1000)))
+        && (!data.keys().contains('scheduledAt') || (data.scheduledAt == null || data.scheduledAt is timestamp))
         && data.hashtags is list && data.hashtags.size() <= 30
         && data.createdAt is timestamp
         && data.updatedAt is timestamp;
+    }
+
+    function isValidWinner(data) {
+      return data.keys().hasAll(['userId', 'topic', 'post_type', 'hook', 'post', 'createdAt'])
+        && data.keys().size() <= 8
+        && data.userId == request.auth.uid
+        && data.topic is string && data.topic.size() <= 10000
+        && data.post_type is string && data.post_type.size() <= 50
+        && data.hook is string && data.hook.size() <= 2000
+        && data.post is string && data.post.size() <= 10000
+        && (!data.keys().contains('cta') || (data.cta == null || (data.cta is string && data.cta.size() <= 1000)))
+        && data.createdAt is timestamp;
     }
 
     match /posts/{postId} {
@@ -58,6 +72,16 @@ service cloud.firestore {
         && incoming().userId == existing().userId
         && incoming().createdAt == existing().createdAt
         && incoming().updatedAt == request.time;
+    }
+
+    match /winners/{winnerId} {
+      allow create: if isSignedIn() 
+        && isValidId(winnerId) 
+        && isValidWinner(incoming())
+        && incoming().createdAt == request.time;
+      
+      allow list, get: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow delete: if isOwner(existing().userId);
     }
   }
 }

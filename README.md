@@ -1,105 +1,41 @@
 # LinkedIn Post Architect (PostGenius)
 
-PostGenius is an elite LinkedIn ghostwriter and content strategist app that transforms your rough notes into high-performing, authentic LinkedIn posts using professional content strategy principles.
+PostGenius is an elite LinkedIn ghostwriter and content strategist app that transforms your rough notes into high-performing, authentic LinkedIn posts using the standard-setting Gemini AI.
 
 ## Key Features
 
-- **Elite Generation Logic**: Built on principles like "The Slide" sentence structure and pattern-interrupt hooks to ensure maximum readability and engagement.
-- **Smart Style Selection**: Choose from various post types (Thought Leadership, Personal Story, Lesson Learned, Career Update, and more).
-- **Tone Orchestration**: Adjust the voice to match your professional brand (Professional vs. Conversational).
-- **Architecture Library**: Save your best drafts locally to your "Architecture Library" and revisit them at any time.
-- **Minimalist UX**: A clean, two-pane layout inspired by modern professional tools.
-- **Integrated CTAs**: Automatically generates thoughtful engagement questions.
+- **Elite AI Generation**: Built on professional content strategy principles like "The Slide" sentence structure and pattern-interrupt hooks.
+- **Smart Style Selection**: Choose from various post types (Thought Leadership, Personal Story, Lesson Learned, and more).
+- **Tone Orchestration**: Adjust the voice to match your professional brand (Professional, Conversational, Bold, Inspirational, etc.).
+- **Interactive Library**: Secure Google authentication allows you to save your best drafts to a personal "Architecture Library" and resume them at any time.
+- **AI-Powered Scout Trends**: Discover what's viral on LinkedIn and Reddit in real-time. Uses Google Search grounding to ensure topics are current and relevant to today's professional zeitgeist.
+- **A/B Performance Testing**: Generate and compare two distinct psychological angles side-by-side to determine which hook and structure resonates most.
+- **Preference Learning Engine**: Your AI ghostwriter learns your taste. By "Marking as Winner" specific A/B variations, you bias future generations toward the structures you prefer.
+- **Recursive Refinement**: Don't like a specific paragraph? Use the refinement chat to ask the AI for specific adjustments without losing your progress.
+- **Advanced Scheduling**: Plan your content calendar by scheduling posts for future dates and times directly within the app.
+- **Live Preview Mockups**: See your post exactly how it will appear on LinkedIn, optimized for the "See more" click.
+- **Reflective CTAs**: Automatically generates thoughtful, integrated calls-to-action that drive meaningful engagement.
 
 ## Technical Stack
 
-- **Frontend**: Vanilla ES6+ JavaScript, CSS3 (Modern Flexbox/Grid), Semantic HTML5
-- **Persistence**: Browser `localStorage` for local draft management
-- **Animations**: CSS Keyframes for smooth UI transitions
-- **Deployment**: Static GitHub Pages (zero build step required)
+- **Frontend**: React 18, Vite, Tailwind CSS
+- **AI Engine**: Google Gemini (via `@google/genai`)
+- **Backend/Persistence**: Firebase Authentication, Cloud Firestore
+- **Animations**: Motion (f.k.a. Framer Motion)
+- **Icons**: Lucide React
 
 ## Getting Started
 
-### Local Development
-Simply open `index.html` in your browser. No installation, build, or server needed.
-
-### Usage
-1. **Input Your Topic**: Paste rough notes or a few bullet points.
+1. **Input Your Topic**: Paste rough notes, a link, or just a few bullet points.
 2. **Configure Your Strategy**: Select the style and tone that fits your goal.
-3. **Generate**: Click "Generate Drafts" to create your LinkedIn post.
-4. **Save**: Click "Save to Library" on any draft you want to keep.
-5. **Manage**: Use the "Architecture Library" pane to view or delete your saved drafts.
+3. **Generate**: Click generate and watch as the AI crafts multiple drafts using different psychological angles.
+4. **Login**: Sign in with Google to save your drafts for later.
+5. **Copy & Post**: One-click copy for the body, hook, and hashtags.
 
-### Deployment
+## Deployment Notes
 
-**GitHub Pages (Automatic)**
-- Push code to the `main` branch
-- GitHub Actions automatically deploys via `.github/workflows/static.yml`
-- Your app is live at `https://<username>.github.io/linkedin-post-architect/`
+### GitHub Pages Pathing
+This project is configured with `base: './'` in `vite.config.ts` to ensure compatibility with GitHub Pages sub-directory deployments.
 
-**Manual Deployment**
-- Copy `index.html`, `style.css`, and `script.js` to any static hosting (Netlify, Vercel, etc.)
-- No build step required
-
-## Project Structure
-
-```
-.
-├── index.html              # Main application
-├── style.css               # Complete styling
-├── script.js               # All JavaScript logic
-├── README.md               # This file
-├── CHANGELOG.md            # Version history
-├── AGENTS.md               # Development guidelines
-├── LICENSE                 # MIT License
-├── .gitignore              # Git ignore rules
-└── .github/
-    └── workflows/
-        └── static.yml      # GitHub Pages deployment
-```
-
-## Persistence
-
-All saved drafts are stored in your browser's `localStorage` under the key `post_library`. Your library persists across sessions and is never transmitted to any server.
-
-To clear your library: Open browser DevTools → Application → Local Storage → Delete `post_library` entry.
-
-## Browser Support
-
-Works on all modern browsers supporting:
-- ES6+ JavaScript
-- CSS Grid and Flexbox
-- `localStorage` API
-
-**Tested on:**
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
-
-## Contributing
-
-This is a open-source project. To contribute:
-
-1. Fork the repository
-2. Make your changes in a feature branch
-3. Test thoroughly in your browser
-4. Update `CHANGELOG.md` with your changes
-5. Submit a pull request
-
-See `AGENTS.md` for detailed development guidelines.
-
-## License
-
-MIT License © 2025 Darshil Shah
-
-See `LICENSE` file for details.
-
-## Roadmap
-
-Future enhancements being considered:
-- Multi-language support
-- PDF export for drafts
-- LinkedIn API integration for direct posting (reference implementation exists in archived Firebase version)
-- Dark mode theme
-- Custom template builder
-- Analytics dashboard
+### Environment Variables
+For the Gemini AI to function in your deployed build, ensure you provide your `GEMINI_API_KEY` during the build process. If using GitHub Actions, add it as a Repository Secret and pass it to the build step.

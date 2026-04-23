@@ -1,101 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PostGenius | LinkedIn Post Architect</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="app-container">
-        <header>
-            <h1>PostGenius</h1>
-            <p class="tagline">Your Elite LinkedIn Post Architect</p>
-        </header>
-
-        <main class="app-layout">
-            <section class="generator-pane">
-                <div class="card">
-                    <h2>Post Generator</h2>
-                    <div class="input-group">
-                        <label for="post-idea">Post Idea / Notes</label>
-                        <textarea id="post-idea" placeholder="Paste rough notes, a link, or bullet points here..."></textarea>
-                    </div>
-
-                    <div class="controls">
-                        <div class="control-row">
-                            <div class="control">
-                                <label for="post-type">Style</label>
-                                <select id="post-type">
-                                    <option value="thought_leadership">Thought Leadership</option>
-                                    <option value="story">Personal Story</option>
-                                    <option value="lesson">Lesson Learned</option>
-                                    <option value="update">Career Update</option>
-                                    <option value="announcement">Announcement</option>
-                                    <option value="hiring">Hiring</option>
-                                    <option value="educational">Educational</option>
-                                    <option value="opinion">Opinion</option>
-                                </select>
-                            </div>
-                            <div class="control">
-                                <label>Tone</label>
-                                <div class="radio-group">
-                                    <input type="radio" id="tone-professional" name="tone" value="professional" checked>
-                                    <label for="tone-professional">Professional</label>
-                                    <input type="radio" id="tone-casual" name="tone" value="casual">
-                                    <label for="tone-casual">Conversational</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="control-row">
-                            <div class="control">
-                                <label for="audience">Audience</label>
-                                <input type="text" id="audience" placeholder="e.g. Software Engineers">
-                            </div>
-                            <div class="control">
-                                <label for="length">Length</label>
-                                <select id="length">
-                                    <option value="short">Short</option>
-                                    <option value="medium" selected>Medium</option>
-                                    <option value="long">Long</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="control-row">
-                            <div class="control">
-                                <label for="cta">Custom CTA</label>
-                                <input type="text" id="cta" placeholder="Optional engagement question">
-                            </div>
-                            <div class="control checkbox-control">
-                                <input type="checkbox" id="include-hashtags" checked>
-                                <label for="include-hashtags">Include Hashtags</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button id="generate-btn">Generate Drafts</button>
-                </div>
-
-                <div id="post-output">
-                    <!-- Generated posts will appear here -->
-                </div>
-            </section>
-
-            <aside class="library-pane">
-                <div class="card">
-                    <h2>Architecture Library</h2>
-                    <p class="subtitle">Your saved high-performance drafts</p>
-                    <div id="library-list">
-                        <p class="empty-msg">No saved drafts yet.</p>
-                    </div>
-                </div>
-            </aside>
-        </main>
-    </div>
-
-    <div id="toast-container"></div>
-    <script src="script.js"></script>
-</body>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
+

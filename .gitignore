@@ -1,18 +1,8 @@
-# Build & Dependencies
 node_modules/
-dist/
 build/
-
-# IDE & OS
+dist/
+coverage/
 .DS_Store
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.env.local
-
-# Logs
 *.log
-npm-debug.log*
-yarn-debug.log*
+.env*
+!.env.example
