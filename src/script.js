@@ -103,7 +103,7 @@ export function getHashtags(idea, type) {
       .map((w) => w.toLowerCase().replace(/[^a-z]/g, ''));
   const base = words[0] || 'strategy';
   const second = words[1] || 'growth';
-  return [`#${base}`, `#${second}`, `#${type}`, `#strategy`];
+  return [`#${base}`, `#${second}`, `#${type}`, '#strategy'];
 }
 
 /**
@@ -197,7 +197,7 @@ if (typeof document !== 'undefined') {
         }
         localStorage.setItem('post_library', JSON.stringify(library));
         updateLibraryUI();
-      } catch (err) {
+      } catch {
         showToast('Error saving.', 'error');
       }
     };
@@ -207,7 +207,9 @@ if (typeof document !== 'undefined') {
       let library = [];
       try {
         library = JSON.parse(localStorage.getItem('post_library') || '[]');
-      } catch (err) {}
+      } catch {
+        // Fallback for missing or corrupted library
+      }
       if (searchTerm) {
         const s = searchTerm.toLowerCase();
         library = library.filter((item) =>
