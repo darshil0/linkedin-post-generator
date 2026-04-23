@@ -1,5 +1,5 @@
 // Core Generation Logic
-function getHooks(idea, type, tone) {
+export function getHooks(idea, type, tone) {
     const templates = {
         thought_leadership: [
             `Most people think ${idea} is a technical problem.\n\nIt's not. It's a psychology problem.`,
@@ -8,7 +8,7 @@ function getHooks(idea, type, tone) {
         ],
         story: [
             `I almost quit when I first started with ${idea}.`,
-            `A simple conversation about ${idea} changed my entire career path.`,
+            `A simple conversation about ${idea} changed my entire career trajectory.`,
             `I used to be afraid of ${idea}.\n\nUntil I realized this one truth.`
         ],
         lesson: [
@@ -26,15 +26,14 @@ function getHooks(idea, type, tone) {
     let result = templates[type] || templates.thought_leadership;
     if (tone === 'casual') {
         result = result.map(h =>
-            h.replace('trajectory', 'path')
-             .replace(/Master/g, 'get good at')
-             .replace(/master/g, 'get good at')
+            h.replace(/trajectory/g, 'path')
+             .replace(/master/gi, 'get good at')
         );
     }
     return result;
 }
 
-function getBodies(idea, type, tone, audience, length) {
+export function getBodies(idea, tone, audience, length) {
     const aud = audience ? ` specifically for ${audience}` : "";
     const intro = tone === 'professional'
         ? `In my experience with ${idea}${aud}, there is a clear divide between those who succeed and those who struggle.`
@@ -54,20 +53,20 @@ function getBodies(idea, type, tone, audience, length) {
 }
 
 // Note: `pref` is the user-supplied CTA preference; returns default if empty.
-function getCTAs(pref) {
+export function getCTAs(pref) {
     return [pref || "What's the one thing you'd add to this?"];
 }
 
-function getHashtags(idea, type) {
+export function getHashtags(idea, type) {
     const base = idea.split(' ')[0].toLowerCase().replace(/[^a-z]/g, '');
     return [`#${base}`, `#${type}`, `#strategy`, `#growth`];
 }
 
-function generateLinkedInPost(inputs) {
+export function generateLinkedInPost(inputs) {
     const { idea, tone, postType, audience, length, ctaPreference, includeHashtags } = inputs;
 
     const hooks = getHooks(idea, postType, tone);
-    const bodies = getBodies(idea, postType, tone, audience, length);
+    const bodies = getBodies(idea, tone, audience, length);
     const ctas = getCTAs(ctaPreference);
     const hashtags = includeHashtags ? getHashtags(idea, postType) : [];
 
@@ -86,16 +85,7 @@ function generateLinkedInPost(inputs) {
     };
 }
 
-// Support for testing
-if (typeof exports !== 'undefined') {
-    module.exports = {
-        getHooks,
-        getBodies,
-        getCTAs,
-        getHashtags,
-        generateLinkedInPost
-    };
-}
+
 
 // DOM Manipulation Logic
 if (typeof document !== 'undefined') {

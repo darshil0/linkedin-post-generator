@@ -3,13 +3,17 @@
 All notable changes to PostGenius (LinkedIn Post Architect) are documented here.
 
 ## [1.4.1] - 2026-04-23
+### Added
+- Converted project to use ES Modules (ESM) for better consistency with modern JS standards and test environment.
+- Updated `index.html` to use `type="module"` and simplified `script.test.js` imports.
+
 ### Fixed
-- Removed unused `type` parameter from `getCTAs()` function definition and all call sites (ESLint warning).
-- Applied global regex flags to casual-tone replacements in `getHooks()` — previously only the first match was replaced per string.
-- Removed inline casual-tone overrides from `lesson` and `educational` hook templates that were already correct, reducing redundant replacements.
-- Cleaned `package.json`: removed all unused dependencies (React, Vite, Firebase, Tailwind, TypeScript, Express, Lucide) that had accumulated from earlier experiments. Runtime now has zero dependencies; ESLint and Vitest remain as dev-only tools.
-- Bumped `package.json` version to `1.4.0` to match current release and set `"type": "module"` for correct ES module resolution in tests.
-- Updated `README.md` to accurately reflect the vanilla JS / CSS architecture, project structure, and setup steps. Removed references to React, Vite, and Tailwind that no longer apply.
+- Removed unused `type` parameter from `getCTAs()` and `getBodies()` function definitions and all call sites (ESLint cleanup).
+- Optimized casual-tone replacements in `getHooks()` using global case-insensitive regex for "master".
+- Ensured "trajectory" -> "path" replacement is functional by updating the professional hook template.
+- Cleaned `package.json`: removed all unused dependencies. ESLint and Vitest remain as dev-only tools.
+- Bumped `package.json` version to `1.4.1`.
+- Updated `README.md` to accurately reflect the vanilla JS / CSS architecture.
 
 ### Notes
 - Firebase config files (`firebase-applet-config.json`, `firebase-blueprint.json`, `firestore.rules`) should be deleted from the repository. They are unused legacy artifacts from an earlier Firebase reference implementation and one contains a hardcoded API key.

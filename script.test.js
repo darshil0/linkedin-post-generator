@@ -1,7 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import * as script from './script.js';
-
-const { getHooks, getBodies, getCTAs, getHashtags, generateLinkedInPost } = script.default || script;
+import { getHooks, getBodies, getCTAs, getHashtags, generateLinkedInPost } from './script.js';
 
 describe('LinkedIn Post Generation Logic', () => {
     const idea = "Remote work benefits";
