@@ -58,13 +58,14 @@ Posts are stored as JSON in the `post_library` key:
 ```javascript
 {
   id: number,                    // Timestamp-based unique ID
-  post_type: string,             // Framework type (e.g., 'story')
+  postType: string,              // Framework type (e.g., 'story')
   hook: string,                  // Scroll-stopping opening
   post: string,                  // Main body content
   cta: string,                   // Call to action
   hashtags: string[],            // Optimized tags
   idea: string,                  // User's original topic
-  alt_versions: [{hook}, ...]    // Other generated hooks
+  altVersions: [{hook}, ...],    // Other generated hooks
+  allHooks: string[]             // All generated hook options
 }
 ```
 

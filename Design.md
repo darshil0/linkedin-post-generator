@@ -9,13 +9,16 @@ The system uses HSL for better control over luminosity and saturation across the
 ### Light mode
 - **Primary blue**: `hsl(200, 95%, 45%)` (LinkedIn-inspired)
 - **Background**: `hsl(210, 20%, 98%)`
-- **Surface**: `hsla(0, 0%, 100%, 0.8)` (Glass)
+- **Surface**: `hsla(0, 0%, 100%, 0.8)` (Glass card background)
 - **Accent green**: `hsl(150, 60%, 35%)`
+- **Border**: `hsla(210, 20%, 90%, 0.5)`
 
 ### Dark mode
 - **Primary blue**: `hsl(200, 95%, 60%)`
 - **Background**: `hsl(220, 20%, 10%)`
-- **Surface**: `hsla(220, 20%, 18%, 0.8)`
+- **Surface**: `hsla(220, 20%, 18%, 0.8)` (Glass card background)
+- **Accent green**: `hsl(150, 60%, 55%)`
+- **Border**: `hsla(220, 20%, 30%, 0.5)`
 
 ## UI components
 
@@ -52,9 +55,12 @@ A high-fidelity preview component that mimics the social platform.
 
 ## Motion and feedback
 
-- **Entrance**: Cards use a `scaleIn` (0.95 -> 1.0) animation with a cubic-bezier timing function for a "pop" effect.
+- **Entrance**: Cards use a `scaleIn` animation (`0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)`) for a "pop" effect.
+- **Header**: Uses `fadeInDown` (`0.8s ease-out`) for a smooth introduction.
 - **Interaction**: Buttons lift on hover and depress on click.
-- **Pulsing**: The character counter uses a `pulseRed` scale animation when the 3,000-character limit is breached.
+- **Pulsing**: The character counter uses a `pulseRed` animation (`1s infinite alternate`) when the 3,000-character limit is breached.
+- **Generation**: Simulated AI processing uses a `shimmer` animation (`1.5s infinite`).
+- **Success**: Saving to library triggers `confettiFall` (`2.5s ease-out forwards`).
 - **Modals**: The comparison grid uses `backdrop-filter: blur(8px)` to create a focused, high-end viewing environment.
 
 ## Technical styling standards
