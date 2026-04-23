@@ -1,8 +1,9 @@
 {
-  "name": "linkedin-post-generator",
+  "name": "linkedin-post-architect",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.4.0",
   "description": "A vanilla JavaScript LinkedIn post generator.",
+  "type": "module",
   "scripts": {
     "test": "vitest run",
     "lint": "npx eslint script.js --no-config-lookup --rule 'no-unused-vars: warn' --rule 'no-undef: error' --global document,window,localStorage,console,setTimeout,Date,exports,module,navigator"
