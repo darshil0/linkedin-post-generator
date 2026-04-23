@@ -1,6 +1,6 @@
 # PostGenius — LinkedIn Post Architect
 
-![PostGenius Mockup](C:\Users\mayan\.gemini\antigravity\brain\779c62d5-5c60-47a6-b417-edf5777809ac\postgenius_mockup_v1_1776978634938.png)
+![PostGenius Mockup](assets/mockup.png)
 
 PostGenius is a high-fidelity, lightweight LinkedIn post generator designed for creators and professionals. It transforms raw ideas into structured, high-performing drafts using proven content frameworks—all without leaving your browser.
 
