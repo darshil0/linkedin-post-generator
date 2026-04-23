@@ -1,58 +1,58 @@
-# Design Specification: PostGenius
+# Design specification: PostGenius
 
-PostGenius follows a "Modern Professional" design aesthetic, blending LinkedIn's core identity with high-end SaaS visual trends like Glassmorphism and vibrant gradients.
+PostGenius follows a modern professional design aesthetic, blending LinkedIn's core identity with high-end SaaS visual trends like glassmorphism and vibrant gradients.
 
-## 🎨 Color System (HSL)
+## Color system (HSL)
 
 The system uses HSL for better control over luminosity and saturation across themes.
 
-### Light Mode
-- **Primary Blue**: `hsl(200, 95%, 45%)` (LinkedIn-inspired)
+### Light mode
+- **Primary blue**: `hsl(200, 95%, 45%)` (LinkedIn-inspired)
 - **Background**: `hsl(210, 20%, 98%)`
 - **Surface**: `hsla(0, 0%, 100%, 0.8)` (Glass)
-- **Accent Green**: `hsl(150, 60%, 35%)`
+- **Accent green**: `hsl(150, 60%, 35%)`
 
-### Dark Mode
-- **Primary Blue**: `hsl(200, 95%, 60%)`
+### Dark mode
+- **Primary blue**: `hsl(200, 95%, 60%)`
 - **Background**: `hsl(220, 20%, 10%)`
 - **Surface**: `hsla(220, 20%, 18%, 0.8)`
 
-## 🖼️ UI Components
+## UI components
 
-### 1. The Glass Card
-Every major module is housed in a "Glass Card."
+### 1. The glass card
+Every major module is housed in a glass card.
 - **Properties**: `backdrop-filter: blur(12px)`, `border: 1px solid hsla(...)`.
 - **Rationale**: Provides depth and focus while maintaining a lightweight feel.
 
-### 2. The Character Progress Bar
+### 2. The character progress bar
 - **Logic**: Visualizes content length against platform limits.
-- **Color States**:
+- **Color states**:
   - Blue: Safe (< 80%)
   - Orange: Warning (> 80%)
-  - Red: Limit Exceeded (> 100%)
+  - Red: Limit exceeded (> 100%)
 
-### 3. LinkedIn Mockup
+### 3. LinkedIn mockup
 A high-fidelity preview component that mimics the social platform.
 - **Anatomy**: Circular avatar, bold name, light-gray metadata, and pre-wrap body text.
-- **Interaction**: Updates in real-time as the user edits the draft.
+- **Interaction**: Updates in real-time as you edit the draft.
 
-### 4. Skeleton Shimmer
-- **Logic**: Used during the generation phase to manage user expectations.
-- **Visual**: A multi-layered gradient shimmer (`--skeleton-bg`) that animates across the layout.
+### 4. Skeleton shimmer
+- **Logic**: Used during the generation phase to manage your expectations.
+- **Visual**: A multi-layered gradient shimmer that animates across the layout.
 
-### 5. Confetti System
-- **Logic**: Triggered on successful save to the library.
-- **Visual**: Randomized particle bursts with physics-based gravity (`confettiFall` animation).
+### 5. Confetti system
+- **Logic**: Triggered on a successful save to the library.
+- **Visual**: Randomized particle bursts with physics-based gravity.
 
-## 🔡 Typography
+## Typography
 
-- **Primary Font**: `Inter` (Google Fonts).
+- **Primary font**: `Inter` (Google Fonts).
 - **Weights**: 400 (Regular), 600 (Semibold), 800 (Extra Bold).
 - **Rationale**: `Inter` provides exceptional legibility on digital screens and a clean, tech-forward look.
 
-## ✨ Motion & Feedback
+## Motion and feedback
 
 - **Entrance**: Cards use a `scaleIn` (0.95 -> 1.0) animation with a cubic-bezier timing function for a "pop" effect.
-- **Interactive**: Buttons lift on hover and depress on active click.
+- **Interaction**: Buttons lift on hover and depress on click.
 - **Pulsing**: The character counter uses a `pulseRed` scale animation when the 3,000-character limit is breached.
 - **Modals**: The comparison grid uses `backdrop-filter: blur(8px)` to create a focused, high-end viewing environment.
