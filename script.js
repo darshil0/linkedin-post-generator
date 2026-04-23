@@ -105,6 +105,15 @@ if (typeof document !== 'undefined') {
         postIdeaInput.addEventListener('input', () => {
             const count = postIdeaInput.value.length;
             charCounter.textContent = `${count} characters`;
+            
+            // Visual feedback for character count
+            if (count > 2500) {
+                charCounter.style.color = 'var(--error-red)';
+            } else if (count > 2000) {
+                charCounter.style.color = 'orange';
+            } else {
+                charCounter.style.color = 'var(--text-muted)';
+            }
         });
 
         // Clear Form
@@ -152,11 +161,24 @@ if (typeof document !== 'undefined') {
         });
 
         function showToast(message, type = 'success') {
+            // Limit active toasts
+            if (toastContainer.children.length > 2) {
+                toastContainer.removeChild(toastContainer.firstChild);
+            }
+
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
-            toast.textContent = message;
+            
+            const icon = type === 'success' ? '✅' : '⚠️';
+            toast.textContent = `${icon} ${message}`;
+            
             toastContainer.appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(20px)';
+                toast.style.transition = 'all 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
         }
 
         function copyToClipboard(result) {
@@ -180,6 +202,7 @@ if (typeof document !== 'undefined') {
             title.textContent = `${result.post_type.replace('_', ' ')} Draft`;
 
             const actionsDiv = document.createElement('div');
+            actionsDiv.className = 'actions-wrap';
 
             const copyBtn = document.createElement('button');
             copyBtn.className = 'copy-btn';
@@ -248,23 +271,49 @@ if (typeof document !== 'undefined') {
         }
 
         function saveToLibrary(post) {
-            const library = JSON.parse(localStorage.getItem('post_library') || '[]');
-            library.unshift(post);
-            localStorage.setItem('post_library', JSON.stringify(library));
-            updateLibraryUI();
-            showToast('Saved to Architecture Library!');
+            try {
+                const library = JSON.parse(localStorage.getItem('post_library') || '[]');
+                
+                // Prevent duplicates
+                const exists = library.some(item => 
+                    item.idea === post.idea && item.hook === post.hook
+                );
+                
+                if (exists) {
+                    showToast('This draft is already in your library.', 'error');
+                    return;
+                }
+
+                library.unshift(post);
+                localStorage.setItem('post_library', JSON.stringify(library));
+                updateLibraryUI();
+                showToast('Saved to Architecture Library!');
+            } catch (err) {
+                console.error('Library save error:', err);
+                showToast('Could not save to library.', 'error');
+            }
         }
 
         function deleteFromLibrary(id) {
-            let library = JSON.parse(localStorage.getItem('post_library') || '[]');
-            library = library.filter(item => item.id !== id);
-            localStorage.setItem('post_library', JSON.stringify(library));
-            updateLibraryUI();
-            showToast('Draft deleted.', 'error');
+            try {
+                let library = JSON.parse(localStorage.getItem('post_library') || '[]');
+                library = library.filter(item => item.id !== id);
+                localStorage.setItem('post_library', JSON.stringify(library));
+                updateLibraryUI();
+                showToast('Draft deleted.', 'error');
+            } catch (err) {
+                console.error('Library delete error:', err);
+            }
         }
 
         function updateLibraryUI() {
-            const library = JSON.parse(localStorage.getItem('post_library') || '[]');
+            let library = [];
+            try {
+                library = JSON.parse(localStorage.getItem('post_library') || '[]');
+            } catch (err) {
+                console.error('Library load error:', err);
+            }
+            
             libraryList.innerHTML = '';
 
             if (library.length === 0) {
@@ -293,6 +342,14 @@ if (typeof document !== 'undefined') {
                 loadBtn.textContent = 'View';
                 loadBtn.onclick = () => renderPost(item);
 
+                const quickCopyBtn = document.createElement('button');
+                quickCopyBtn.className = 'secondary-btn';
+                quickCopyBtn.textContent = 'Copy';
+                quickCopyBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    copyToClipboard(item);
+                };
+
                 const deleteBtn = document.createElement('button');
                 deleteBtn.className = 'delete-btn';
                 deleteBtn.textContent = 'Delete';
@@ -302,6 +359,7 @@ if (typeof document !== 'undefined') {
                 };
 
                 actions.appendChild(loadBtn);
+                actions.appendChild(quickCopyBtn);
                 actions.appendChild(deleteBtn);
                 div.appendChild(title);
                 div.appendChild(preview);
