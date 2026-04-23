@@ -15,12 +15,13 @@ PostGenius is a high-fidelity, lightweight LinkedIn post generator designed for 
 ## ✨ Key Features
 
 - **Strategic Frameworks**: Choose from Thought Leadership, Personal Story, Lesson Learned, or Educational templates with 20+ variations.
-- **Dynamic Tones**: Switch between *Professional* and *Casual* voices with real-time word replacement.
-- **LinkedIn Preview Mockup**: Visualize your post exactly as it will appear in the LinkedIn feed.
+- **LinkedIn Preview Mockup**: Visualize your post exactly as it will appear in the LinkedIn feed, complete with **custom avatar upload**.
+- **Skeleton Generation**: Professional shimmer states that simulate AI processing for a premium feel.
+- **Comparison Grid**: Side-by-side view to evaluate all generated variations simultaneously.
+- **Delightful Interactions**: Particle confetti bursts on save and pulsing character count alerts.
 - **Inline Editor**: Edit your generated drafts directly in the UI before saving.
 - **Dark Mode Support**: High-fidelity theme toggle for a personalized creator experience.
-- **Character Progress Bar**: Real-time visual feedback on LinkedIn's 3,000-character limit.
-- **Architecture Library**: Save and search your best blueprints locally using browser `localStorage`.
+- **Architecture Library**: Save and search your best blueprints locally with SVG-enhanced empty states.
 - **Modern ESM Foundation**: Built with standard ES Modules for a future-proof architecture.
 
 ## 🧠 Content Strategy
@@ -63,7 +64,7 @@ PostGenius doesn't just "write text." It follows the **"The Slide"** methodology
 ├── Skills.md           # Technical Competencies
 ├── Design.md           # Design System & Aesthetic
 ├── AGENTS.md           # AI Contributor Instructions
-├── package.json        # Tooling Configuration (v1.5.0)
+├── package.json        # Tooling Configuration (v1.6.0)
 ├── LICENSE             # MIT License
 └── .github/            # GitHub Actions
     └── workflows/

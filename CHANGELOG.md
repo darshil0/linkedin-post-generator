@@ -2,6 +2,20 @@
 
 All notable changes to PostGenius (LinkedIn Post Architect) are documented here.
 
+## [1.6.0] - 2026-04-23
+### Added
+- **Skeleton Loaders**: Implemented shimmering shimmer states for content generation to simulate AI processing.
+- **Confetti Particle System**: A delightful particle burst when saving drafts to the library.
+- **Dynamic Avatar Upload**: Users can now upload their own photos to the LinkedIn mockup preview.
+- **Draft Comparison Grid**: A new modal view to compare all generated hook variations side-by-side.
+- **Contextual Tooltips**: Added strategic guidance icons to form fields.
+- **Critical Character Pulse**: Alert animation when exceeding LinkedIn's 3,000-character limit.
+- **Premium Empty States**: Added SVG illustrations to the Architecture Library for a better first-run experience.
+
+### Changed
+- Refined `style.css` with advanced shimmer, particle, and modal animations.
+- Updated `script.js` with `FileReader` logic for avatars and `setTimeout` orchestration for skeleton states.
+
 ## [1.5.0] - 2026-04-23
 ### Added
 - **Interactive LinkedIn Preview**: A live mockup section that visualizes exactly how your post will look on the platform.

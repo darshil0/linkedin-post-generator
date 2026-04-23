@@ -1,7 +1,7 @@
 {
   "name": "linkedin-post-architect",
   "private": true,
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "A vanilla JavaScript LinkedIn post generator.",
   "type": "module",
   "scripts": {

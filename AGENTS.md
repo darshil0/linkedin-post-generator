@@ -27,7 +27,7 @@ This is a high-fidelity static web application built with HTML5, CSS3, and moder
 ├── Skills.md               # Technical Competency Guide
 ├── Design.md               # Design System Specification
 ├── AGENTS.md               # This File
-├── package.json            # Dev Tooling & Metadata
+├── package.json            # Dev Tooling & Metadata (v1.6.0)
 ├── LICENSE                 # MIT License
 └── .github/                # Automation Workflows
 ```
@@ -35,6 +35,8 @@ This is a high-fidelity static web application built with HTML5, CSS3, and moder
 ## Coding Conventions
 - **ES Modules**: Always use `export` for functional logic in `src/script.js`. Import these in `tests/script.test.js`.
 - **Theming**: Use HSL CSS variables for colors to support Dark/Light mode seamlessly.
+- **Micro-Interactions**: Maintain the high-fidelity feel by utilizing the built-in Skeleton Loader (`.skeleton`), Confetti System (`createConfetti()`), and Pulse Animations.
+- **Modals**: Use the comparison modal for side-by-side variation evaluation.
 - **Glassmorphism**: Maintain the premium look using `backdrop-filter` and subtle hsla-based borders.
 - **Security**: Strictly use `textContent` or `createTextNode` for rendering user data. Avoid `innerHTML` with dynamic content.
 - **Robustness**: Wrap `localStorage` and `JSON.parse` operations in `try-catch` blocks.

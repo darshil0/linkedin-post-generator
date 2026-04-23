@@ -36,6 +36,14 @@ A high-fidelity preview component that mimics the social platform.
 - **Anatomy**: Circular avatar, bold name, light-gray metadata, and pre-wrap body text.
 - **Interaction**: Updates in real-time as the user edits the draft.
 
+### 4. Skeleton Shimmer
+- **Logic**: Used during the generation phase to manage user expectations.
+- **Visual**: A multi-layered gradient shimmer (`--skeleton-bg`) that animates across the layout.
+
+### 5. Confetti System
+- **Logic**: Triggered on successful save to the library.
+- **Visual**: Randomized particle bursts with physics-based gravity (`confettiFall` animation).
+
 ## 🔡 Typography
 
 - **Primary Font**: `Inter` (Google Fonts).
@@ -46,4 +54,5 @@ A high-fidelity preview component that mimics the social platform.
 
 - **Entrance**: Cards use a `scaleIn` (0.95 -> 1.0) animation with a cubic-bezier timing function for a "pop" effect.
 - **Interactive**: Buttons lift on hover and depress on active click.
-- **Toasts**: Slide-in from the right with high-contrast backgrounds to ensure critical feedback is never missed.
+- **Pulsing**: The character counter uses a `pulseRed` scale animation when the 3,000-character limit is breached.
+- **Modals**: The comparison grid uses `backdrop-filter: blur(8px)` to create a focused, high-end viewing environment.
