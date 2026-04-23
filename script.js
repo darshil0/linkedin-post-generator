@@ -96,13 +96,31 @@ if (typeof exports !== 'undefined') {
 if (typeof document !== 'undefined') {
     document.addEventListener('DOMContentLoaded', () => {
         const postIdeaInput = document.getElementById('post-idea');
+        const charCounter = document.getElementById('char-counter');
         const generateBtn = document.getElementById('generate-btn');
+        const clearBtn = document.getElementById('clear-btn');
         const postOutput = document.getElementById('post-output');
         const libraryList = document.getElementById('library-list');
         const toastContainer = document.getElementById('toast-container');
 
         // Initialize Library
         updateLibraryUI();
+
+        // Character Counter
+        postIdeaInput.addEventListener('input', () => {
+            const count = postIdeaInput.value.length;
+            charCounter.textContent = `${count} characters`;
+        });
+
+        // Clear Form
+        clearBtn.addEventListener('click', () => {
+            postIdeaInput.value = '';
+            charCounter.textContent = '0 characters';
+            document.getElementById('audience').value = '';
+            document.getElementById('cta').value = '';
+            postOutput.innerHTML = '';
+            showToast('Form cleared.', 'error');
+        });
 
         generateBtn.addEventListener('click', () => {
             const postIdea = postIdeaInput.value.trim();
@@ -146,6 +164,16 @@ if (typeof document !== 'undefined') {
             setTimeout(() => toast.remove(), 3000);
         }
 
+        function copyToClipboard(result) {
+            const fullPost = `${result.hook}\n\n${result.post}\n\n${result.cta}\n\n${result.hashtags.join(' ')}`;
+            navigator.clipboard.writeText(fullPost).then(() => {
+                showToast('Copied to clipboard!');
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+                showToast('Failed to copy text.', 'error');
+            });
+        }
+
         function renderPost(result) {
             postOutput.innerHTML = '';
             const postContainer = document.createElement('div');
@@ -156,13 +184,24 @@ if (typeof document !== 'undefined') {
             const title = document.createElement('h3');
             title.textContent = `${result.post_type.replace('_', ' ')} Draft`;
 
+            const actionsDiv = document.createElement('div');
+
+            const copyBtn = document.createElement('button');
+            copyBtn.className = 'copy-btn';
+            copyBtn.textContent = 'Copy';
+            copyBtn.setAttribute('aria-label', 'Copy post to clipboard');
+            copyBtn.onclick = () => copyToClipboard(result);
+
             const saveBtn = document.createElement('button');
             saveBtn.className = 'save-btn';
-            saveBtn.textContent = 'Save to Library';
+            saveBtn.textContent = 'Save';
+            saveBtn.setAttribute('aria-label', 'Save post to library');
             saveBtn.onclick = () => saveToLibrary(result);
 
+            actionsDiv.appendChild(copyBtn);
+            actionsDiv.appendChild(saveBtn);
             header.appendChild(title);
-            header.appendChild(saveBtn);
+            header.appendChild(actionsDiv);
             postContainer.appendChild(header);
 
             const sections = [
@@ -234,7 +273,10 @@ if (typeof document !== 'undefined') {
             libraryList.innerHTML = '';
 
             if (library.length === 0) {
-                libraryList.innerHTML = '<p class="empty-msg">No saved drafts yet.</p>';
+                const emptyMsg = document.createElement('p');
+                emptyMsg.className = 'empty-msg';
+                emptyMsg.textContent = 'No saved drafts yet.';
+                libraryList.appendChild(emptyMsg);
                 return;
             }
 

@@ -20,8 +20,11 @@
                     <p class="subtitle">Draft high-performing LinkedIn content in seconds.</p>
 
                     <div class="input-group">
-                        <label for="post-idea">What's the core idea of your post?</label>
-                        <textarea id="post-idea" placeholder="e.g., The importance of emotional intelligence in leadership..."></textarea>
+                        <div class="label-row">
+                            <label for="post-idea">What's the core idea of your post?</label>
+                            <span id="char-counter" class="char-counter">0 characters</span>
+                        </div>
+                        <textarea id="post-idea" aria-label="Core idea for your LinkedIn post" placeholder="e.g., The importance of emotional intelligence in leadership..."></textarea>
                     </div>
 
                     <div class="control-row">
@@ -71,10 +74,13 @@
                         <label for="include-hashtags">Include optimized hashtags</label>
                     </div>
 
-                    <button id="generate-btn">Generate Drafts</button>
+                    <div class="button-group">
+                        <button id="generate-btn" aria-label="Generate post drafts">Generate Drafts</button>
+                        <button id="clear-btn" class="secondary-btn" aria-label="Clear all inputs">Clear</button>
+                    </div>
                 </div>
 
-                <div id="post-output">
+                <div id="post-output" aria-live="polite">
                     <!-- Generated posts will appear here -->
                 </div>
             </section>
